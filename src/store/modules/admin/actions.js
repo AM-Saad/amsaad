@@ -51,16 +51,17 @@ const getProjects = async ({ commit, rootState, state }) => {
   const res = await Admin.getProjects(state.jwt, rootState.url)
   checkAuth(res, commit)
   commit('msg', { msg: res.msg, type: res.state ? 'success' : 'warning' })
-  res.state && commit('updateprojects', res.json.projects)
+  res.state && commit('setProjects', res.json.projects)
   return res.state ? true : false
 };
 const addProject = async ({ commit, rootState, state }, { data }) => {
   const res = await Admin.addProject(data, state.jwt, rootState.url)
   checkAuth(res, commit)
+  res.state && commit('addProject', res.json.project)
   
   commit('msg', { msg: res.msg, type: res.state ? 'success' : 'warning' }, { root: true })
 
-  return res.state ? true : false
+  return res.state ? res.json.project : false
 };
 const editProject = async ({ commit, rootState, state }, { data, id }) => {
   const res = await Admin.editProject(data, id, state.jwt, rootState.url)

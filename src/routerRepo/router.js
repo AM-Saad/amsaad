@@ -43,14 +43,7 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "Contact" */ "../views/Contact.vue"),
     },
-    {
-      path: "/admin/dashboard",
-      name: "dashboard",
-      component: () =>
-        import(/* webpackChunkName: "Dashboard" */ "../components/Admin/pages/Dashboard.vue"),
-      meta: { requiredAuth: true },
-
-    },
+  
     {
       path: '*',
       name: 'Not Found',

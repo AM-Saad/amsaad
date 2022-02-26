@@ -164,9 +164,9 @@
           <div class="items__item-date">Posted At: {{ article.date }}</div>
 
           <div class="items__item-image">
-            <img :src="this.url + '/' + article.image" alt />
+            <img :src="article.image" :alt="article.title" />
           </div>
-          <div id="reacts">
+          <div id="reacts" v-if="article.source == 'server'">
             <ul>
               <li @click="react(article._id, 'highfive', $event)">
                 <div class="before"></div>
@@ -310,7 +310,7 @@ export default {
       this.reload = false;
 
       if (this.articles.length == 0) {
-        await this.$store.dispatch("studio/getAllArticles");
+        await this.$store.dispatch("studio/fetchArticles");
       }
       this.article = this.articleById(id);
       if (!this.article) return (this.reload = true);

@@ -5,7 +5,7 @@
         <ImageItem
           class="items__item-image"
           v-if="article.image"
-          :source="this.url +'/'+ article.image"
+          :source="article.image"
         ></ImageItem>
 
         <div class="items__item-date">{{article.date}}</div>

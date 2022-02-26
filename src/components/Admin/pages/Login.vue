@@ -26,7 +26,8 @@
             id="passowrd"
             placeholder="Enter Your Password."
           />
-          <button class="btn btn-primary">login</button>
+          <button class="btn btn-primary" v-if="!loading">Login</button>
+          <button class="btn btn-primary opacity-5" v-if="loading">Loading ...</button>
         </div>
       </form>
     </div>
@@ -34,7 +35,6 @@
 </template>
 
 <script>
-
 // import authService from "../../authService";
 // import { log } from "util";
 // import { setInterval } from "timers";
@@ -53,6 +53,7 @@ export default {
   methods: {
     async submitLogin(e) {
       e.preventDefault();
+      this.loading = true;
       const res = await this.$store.dispatch({
         type: "admin/login",
         data: {
@@ -60,7 +61,9 @@ export default {
           password: this.password
         }
       });
-      if (res) this.$router.push({ name: "Dashboard" });
+      this.loading = false;
+
+      if (res) this.$router.push({ path: "/admin/dashboard" });
     }
   }
 };

@@ -8,23 +8,26 @@
     </div>
     <div class="information__text">
       <div>
-        <p>Mobile: <b>00201156565910</b></p>
-        <p>Mobile: <b>00201553733394</b></p>
-        <p>Email: <b>amsstudio.e@gmail.com</b></p>
-        <p>Address: <b>1 Main st, cairo. Egypt</b></p>
+           <p>
+          <b>Contact Us</b>
+        </p>
+        <p>Mobile: 00201156565910</p>
+        <p>Mobile: 00201553733394</p>
+        <p>Email: amsstudio.e@gmail.com</p>
+        <p>Address: Cairo, Egypt</p>
       </div>
       <div>
         <p>
           <b>Follow Us</b>
         </p>
         <p>
-          <a href>LinkedIn</a>
+          <a href="https://www.linkedin.com/in/aabdelrahman-mohamed/">LinkedIn</a>
         </p>
         <p>
-          <a href>Dev</a>
+          <a href="https://dev.to/abdelrahman">Dev</a>
         </p>
         <p>
-          <a href>Facebook</a>
+          <a href="https://github.com/AM-Saad">Github</a>
         </p>
       </div>
     </div>
@@ -82,7 +85,8 @@
       </a>
     </div> -->
     <div class="logo">
-      <img src="@/assets/images/word.png" alt="logo" />
+      <img src="@/assets/images/full-vertical.png" alt="logo" />
+      
     </div>
     <Footer></Footer>
     <AuthPortal :visibilePortal="visibilePortal"></AuthPortal>
@@ -146,7 +150,7 @@ export default {
 }
 .information__text p {
   font-size: 20px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 @media (max-width: 900px) {
   .information__text {

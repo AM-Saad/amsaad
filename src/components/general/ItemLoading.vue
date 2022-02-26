@@ -1,7 +1,8 @@
 <template>
   <div class="loading-item">
     <div class="logo">
-      <img src="/img/word.7c99b425.png" alt="logo" />
+      <img src="@/assets/images/full-vertical.png" alt="logo" />
+
     </div>
     <div class="loading-item-cell">
       <div class="image"></div>

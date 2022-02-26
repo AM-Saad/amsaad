@@ -32,9 +32,11 @@ const updatecategories = (state, categories) => { state.allcategories = categori
 
 const updatearticles = (state, articles) => { state.allarticles = articles; };
 
-const updateprojects = (state, projects) => { state.allprojects = projects; };
+const setProjects = (state, projects) => { state.allprojects = projects; };
 
 const deleteproject = (state, id) => { state.allprojects = state.allprojects.filter(i => i._id.toString() != id.toString()) };
+
+const addProject = (state, project) => { state.allprojects.push(project) };
 
 const deletearticle = (state, id) => { state.allarticles = state.allarticles.filter(i => i._id.toString() != id.toString()) };
 
@@ -55,5 +57,5 @@ const msg = (state, msg) => {
 }
 
 export default {
-  authenticate, checkauthintecated, updatearticles, deletearticle, logout, msg, updateprojects, deleteproject, updatecategories
+  authenticate, checkauthintecated, updatearticles, deletearticle, logout, msg, setProjects, addProject, deleteproject, updatecategories
 };

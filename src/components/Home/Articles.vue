@@ -87,11 +87,11 @@
           </div>
         </div>
       </div>
-      <div class="items" v-if="allarticles.length > 0">
+      <div class="items" v-if="articles.length > 0">
         <!-- <img id="loading" v-if="fetching" class="loading" src="@/assets/loading2.gif" /> -->
-        <Article v-for="article in allarticles" :key="article._id" :article="article"></Article>
+        <Article v-for="article in articles" :key="article._id" :article="article"></Article>
       </div>
-      <div v-if="allarticles.length == 0">
+      <div v-if="articles.length == 0">
         <img
           class="w-75 m-auto block"
           src="../../assets/images/noresult.svg"
@@ -127,7 +127,7 @@ export default {
     ItemLoading
   },
   computed: {
-    ...mapState(["one", "two", "colWidth", "categories"]),
+    ...mapState(["one", "two", "colWidth", "categories", "url"]),
     ...mapState("studio", ["fetching", "filtredArticles", "articles"]),
     ...mapGetters("studio", ["filterArticle"])
   },
@@ -140,22 +140,16 @@ export default {
   },
   methods: {
     async getArticles() {
-      if (this.articles.length == 0) {
-        this.loading = true;
-        this.reload = false;
+      this.loading = true;
+      this.reload = false;
 
-        const res = await this.$store.dispatch({
-          type: "studio/getAllArticles"
-        });
-        this.allarticles = this.articles;
-        if (!res) {
-          this.loading = false;
-          this.reload = true;
-        }
-      } else {
-        this.allarticles = this.articles;
-
+      const res = await this.$store.dispatch({
+        type: "studio/fetchArticles"
+      });
+  
+      if (!res) {
         this.loading = false;
+        this.reload = true;
       }
     },
     shrink() {

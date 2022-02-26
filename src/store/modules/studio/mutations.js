@@ -38,7 +38,8 @@ const logout = (state) => {
 const addnew = (state, expenses) => {
   state.allExpenses.push(expenses)
 }
-const updateArticles = (state, articles) => {
+const setArticles = (state, articles) => {
+  console.log(articles)
   state.articles = articles;
 };
 
@@ -55,5 +56,5 @@ const updateReaction = (state, data) => {
 };
 
 export default {
-  addnew, updateArticles, deleteone, updateProjects, updateReaction, authenticate, checkauthintecated, logout
+  addnew, setArticles, deleteone, updateProjects, updateReaction, authenticate, checkauthintecated, logout
 };

@@ -26,7 +26,7 @@
       </svg>
     </router-link>
     <loadingCom v-if="enter"></loadingCom>
-    <div v-if="!enter" class="columns opacity-none">
+    <div v-if="!enter" class="columns opacity-1">
       <Contacts ref="contacts"></Contacts>
       <About ref="about"></About>
       <!-- <People ref="people"></People> -->
@@ -171,7 +171,6 @@ export default {
   left: 0;
   width: 100%;
   background-color: #fff;
-  border-top: 1.4px solid var(--main-color);
   box-shadow: 2px 4px 8px 0px rgb(161 161 161 / 37%),
     -2px -4px 8px 0px rgb(193 193 193 / 37%);
   z-index: 25;

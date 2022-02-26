@@ -1,7 +1,7 @@
 <template>
   <div>
     <loadingCom v-if="ready != 2"></loadingCom>
-    <div class="columns opacity-none">
+    <div class="columns opacity-1">
       <Articles ref="articles" v-on:created="checkFiltertion"></Articles>
       <Projects ref="projects"  v-on:created="checkFiltertion"></Projects>
       <Studio ref="studio"></Studio>

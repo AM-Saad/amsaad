@@ -1,10 +1,10 @@
 <template>
   <div class="footer-meta">
     <div class>
-      <a class="button-pill button-pill--icon" href="https://www.facebook.com/AMSTUDIO.E"  rel="noreferrer" target="_blank">
+      <a class="button-pill button-pill--icon" href="https://www.facebook.com/amsaad.eg"  rel="noreferrer" target="_blank">
         <i class="fab fa-facebook-f"></i>
       </a>
-      <a class="button-pill button-pill--icon" href="https://www.instagram.com/amstudio.e/" rel="noreferrer" target="_blank">
+      <a class="button-pill button-pill--icon" href="https://www.instagram.com/amsaad.e/" rel="noreferrer" target="_blank">
         <i class="fab fa-instagram"></i>
       </a>
       <router-link class="button-pill button-pill--icon" :to="{name:'contacts'}">Get In Touch</router-link>
@@ -24,9 +24,9 @@ export default {
 <style>
 .logo {
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   right: 10px;
-  width: 40px;
+  width: 45px;
   z-index: 9;
 }
 .logo img {

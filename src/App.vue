@@ -64,13 +64,13 @@ export default {
   },
 
   metaInfo: {
-    title: "AMS STUDIO | Software Community",
+    title: "AMSaad | Software House",
     meta: [
-      { name: "AMS STUDIO", content: "AMS STUDIO | Software Community" },
+      { name: "AMSaad", content: "AMSaad | Software House" },
       {
         name: "description",
         content:
-          "Software company  website  web app  softwares  digital agency  amsstudio amsstudio.me  ams studio  applications  articles  blog  software  websites company community educational javascript web development node.js web designing developing css js apps web apps",
+          "Software house  website  web app  softwares  digital agency  amsstudio amsstudio.me  ams studio  applications  articles  blog  software  websites company community educational javascript web development node.js web designing developing css js apps web apps",
         vmid: "desc"
       },
       {

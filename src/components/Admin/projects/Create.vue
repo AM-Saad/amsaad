@@ -11,7 +11,7 @@
       method="POST"
       enctype="multipart/form-data"
     >
-      <div :class="{ 'loader-effect': loading }">
+      <div >
         <div class="form_inputs">
           <div class="flex f-space-between">
             <h2 v-if="!edit">Create Project</h2>
@@ -45,6 +45,10 @@
               <div class="form-control">
                 <label for="client">Client</label>
                 <input type="text" name="client" id="client" v-model="client" />
+              </div>
+              <div class="form-control">
+                <label for="country">Country</label>
+                <input type="text" name="country" id="country" v-model="country" />
               </div>
               <div class="form-control">
                 <label for="demo">Demo</label>
@@ -177,7 +181,7 @@
             @click.prevent="createProject()"
             class="btn btn-success"
             type="button"
-            v-if="!edit"
+            v-if="!edit && !loading"
           >
             Save
           </button>
@@ -186,9 +190,18 @@
             @click.prevent="createProject()"
             class="btn btn-success"
             type="button"
-            v-if="edit"
+            v-if="edit && !loading"
           >
             Update
+          </button>
+          <button
+            id="addNewitem"
+            @click.prevent="createProject()"
+            class="btn btn-success opacity-5"
+            type="button"
+            v-if="loading"
+          >
+            Loading...
           </button>
         </div>
       </div>
@@ -208,11 +221,12 @@ export default {
       alert: false,
       edit: false,
       active: false,
-      site_description:'',
+      site_description: "",
       loaded: false,
       title: null,
       subtitle: null,
       client: null,
+      country: null,
       demo: null,
       image: "",
       tags: [],
@@ -221,13 +235,13 @@ export default {
       content: [],
       contentimgs: [],
       contentText: null,
-      contentName: null,
+      contentName: null
     };
   },
   computed: {
     ...mapState(["categories", "url"]),
     ...mapState("admin", ["allprojects"]),
-    ...mapGetters("admin", ["projectById"]),
+    ...mapGetters("admin", ["projectById"])
   },
   async created() {
     this.start();
@@ -251,17 +265,19 @@ export default {
         this.active = project.active;
         this.site_description = project.site_description;
         this.client = project.client;
+        this.country = project.country || '';
         this.tags = project.tags;
-        this.content = project.content.map((c) => ({
+        this.content = project.content.map(c => ({
           id: c._id,
           _id: c._id,
           name: c.name,
           text: c.text,
-          image: c.image,
+          image: c.image
         }));
         this.brief = project.brief;
         this.demo = project.demo;
         this.category = project.category;
+        console.log(this.category)
         project && (this.loading = false);
       }
     },
@@ -276,7 +292,7 @@ export default {
       }
     },
     removetag(tag) {
-      this.tags = this.tags.filter((t) => t != tag);
+      this.tags = this.tags.filter(t => t != tag);
     },
     async addContent(img) {
       if (this.contentText) {
@@ -284,7 +300,7 @@ export default {
           id: this.content.length + 1,
           text: this.contentText,
           name: this.contentName,
-          image: img || "",
+          image: img || ""
         });
       }
       this.contentText = "";
@@ -292,11 +308,11 @@ export default {
     async removeContent(id) {
       // let parsed = JSON.parse(JSON.stringify(this.content));
 
-      const item = this.content.find((c) => c.id.toString() == id.toString());
+      const item = this.content.find(c => c.id.toString() == id.toString());
 
       if (item.image) this.deleteImage(item.image);
       this.content = this.content.filter(
-        (c) => c._id.toString() !== id.toString()
+        c => c._id.toString() !== id.toString()
       );
       // console.log(this.content);
     },
@@ -321,11 +337,10 @@ export default {
           //upload image to server
           const res = await fetch("https://ams-server.xyz/admin/media", {
             method: "Post",
-            body: form,
+            body: form
           });
           const json = await res.json();
           this.addContent(json);
-          // this.addContent("");
         }
       }
     },
@@ -334,9 +349,9 @@ export default {
         method: "Put",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({ name: name }),
+        body: JSON.stringify({ name: name })
       });
       // const json = await res.json();
     },
@@ -344,13 +359,13 @@ export default {
       if (!this.title || !this.subtitle || !this.brief) {
         return (this.alert = true);
       }
-
       const data = new FormData();
       data.append("title", this.title);
       data.append("active", this.active);
       data.append("site_description", this.site_description);
       data.append("subtitle", this.subtitle);
       data.append("client", this.client);
+      data.append("country", this.country);
       data.append("brief", this.brief);
       data.append("demo", this.demo);
       data.append("image", this.image);
@@ -361,23 +376,24 @@ export default {
       this.loading = true;
       if (this.edit) {
         const id = this.$route.params.id;
-        await this.$store.dispatch({
+        res = await this.$store.dispatch({
           type: "admin/editProject",
           data,
-          id,
+          id
         });
       } else {
-        await this.$store.dispatch({ type: "admin/addProject", data });
+        res = await this.$store.dispatch({ type: "admin/addProject", data });
       }
       this.loading = false;
-    },
+      if (res) this.$router.push({ path: "/admin/projects" });
+    }
   },
   watch: {
-    category: function (val) {
-      console.log(this);
-      const exist = this.categories.find((c) => c.name == val);
-    },
-  },
+    category: function(val) {
+      console.log(val);
+      const exist = this.categories.find(c => c.name == val);
+    }
+  }
 };
 </script>
 

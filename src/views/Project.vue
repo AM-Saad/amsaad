@@ -172,10 +172,10 @@
               <router-link
                 :to="{
                   name: 'home',
-                  params: { category: project.category.name, type: 'project' },
+                  params: { category: project.category, type: 'project' },
                 }"
                 class="button-pill"
-                >{{ project.category.name }}</router-link
+                >{{ project.category }}</router-link
               >
             </div>
             <!-- <div class="meta__tags">
@@ -187,7 +187,7 @@
               >{{tag}}</a>
             </div>-->
             <div class="meta__attributes">
-              <div class="attribute">
+              <div class="attribute" v-if="project.client">
                 <div class="attribute__title">Client</div>
                 <div class="attribute__text">{{ project.client }}</div>
               </div>
