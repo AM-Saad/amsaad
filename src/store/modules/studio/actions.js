@@ -11,7 +11,7 @@ const checkAuth = (res, dispatch) => {
 
 const fetch_articles = async ({ commit, state, rootState }) => {
   try {
-    
+
     const res = await Studio.fetch_articles(rootState.url)
 
     // Fetch articles from the my blog
@@ -41,7 +41,6 @@ const fetch_articles = async ({ commit, state, rootState }) => {
     commit('setArticles', allarticles)
     return res.state ? true : false
   } catch (err) {
-    console.log(err)
     return false
   }
 
@@ -49,6 +48,7 @@ const fetch_articles = async ({ commit, state, rootState }) => {
 };
 
 const fetch_projects = async ({ commit, state, rootState, dispatch }) => {
+
   const res = await Studio.fetch_projects(rootState.url)
   checkAuth(res, dispatch)
   res.state && commit('setProjects', res.json.reverse())

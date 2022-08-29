@@ -1,13 +1,27 @@
 <template>
   <div class="footer-meta">
     <div class>
-      <a class="button-pill button-pill--icon" href="https://www.facebook.com/amsaad.eg"  rel="noreferrer" target="_blank">
+      <a
+        class="button-pill button-pill--icon"
+        href="https://www.facebook.com/amsaad.eg"
+        rel="noreferrer"
+        target="_blank"
+      >
         <i class="fab fa-facebook-f"></i>
       </a>
-      <a class="button-pill button-pill--icon" href="https://www.instagram.com/amsaad.e/" rel="noreferrer" target="_blank">
+      <a
+        class="button-pill button-pill--icon"
+        href="https://www.instagram.com/amsaad.e/"
+        rel="noreferrer"
+        target="_blank"
+      >
         <i class="fab fa-instagram"></i>
       </a>
-      <router-link class="button-pill button-pill--icon" :to="{name:'contacts'}">Get In Touch</router-link>
+      <router-link
+        class="button-pill button-pill--icon"
+        :to="{ name: 'contacts' }"
+        >Get In Touch</router-link
+      >
     </div>
   </div>
 </template>
@@ -17,7 +31,7 @@ export default {
   name: "Footer",
   data() {
     return {};
-  }
+  },
 };
 </script>
 
@@ -60,5 +74,10 @@ export default {
   top: 175px;
   right: 16px;
   text-align: right;
+}
+@media screen and (max-width: 900px) {
+  .footer-meta {
+    margin-top: unset;
+  }
 }
 </style>

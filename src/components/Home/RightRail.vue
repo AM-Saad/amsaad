@@ -1,5 +1,12 @@
 <template>
-  <div class="rail" data-rail="two" ref="two" @mousedown="getDragPointer($event)"></div>
+  <div
+    class="rail"
+    data-rail="two"
+    ref="two"
+    @mousedown="getDragPointer($event)"
+    v-touch:tap="touchTab"
+    v-touch:moving="touchMove"
+  ></div>
 </template>
 
 <script>
@@ -12,18 +19,33 @@ export default {
     return {
       rail: null,
       shiftX: null,
-      screenwidth: window.innerWidth
+      screenwidth: window.innerWidth,
     };
   },
-  props: ["coltwo", "colthree"],
   computed: {
-    ...mapState(["two", "colWidth"])
+    ...mapState(["two"]),
   },
   mounted() {
     this.rail = this.$refs.two;
-
   },
   methods: {
+    touchTab(e) {
+      if (e.changedTouches) {
+        const x = e.changedTouches[0].clientX;
+        const elRect = e.target.getBoundingClientRect();
+        this.shiftX = x - elRect.left;
+      }
+    },
+    touchMove(e) {
+      if (e.changedTouches) {
+        helpers.moveRail(
+          this.shiftX,
+          this.rail,
+          e.changedTouches[0].pageX,
+          "two"
+        );
+      }
+    },
     getDragPointer(e) {
       const x = e.clientX;
       const elRect = e.target.getBoundingClientRect();
@@ -39,10 +61,8 @@ export default {
     onMouseUp() {
       document.getElementsByTagName("body")[0].style.cursor = "";
       document.removeEventListener("mousemove", this.onMouseMove);
-    }
+    },
   },
-  watch: {}
 };
 </script>
-<style>
-</style>
+

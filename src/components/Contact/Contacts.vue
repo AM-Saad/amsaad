@@ -1,5 +1,5 @@
 <template>
-  <div class="column" data-size="1" data-column="two" ref="contacts">
+  <div class="column" data-column="two" ref="contacts">
     <a class="enlarge button-pill" ref="button">Studio</a>
     <div class="flex f-space-between column-head">
       <div class="items__title">
@@ -95,9 +95,10 @@ export default {
 <style scoped>
 .information__text {
   padding: 0 3rem 16px 16px;
+  min-height: 59vh;
 }
 .information__text p {
-  font-size: 20px;
+  font-size: 2vh;
   margin-bottom: 20px;
 }
 @media (max-width: 900px) {

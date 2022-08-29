@@ -17,9 +17,9 @@
       <div class="flex f-space-between column-head">
         <button
           class="items__title"
-          :disabled="ready !== 2"
+          :disabled="ready % 2 !== 0"
           @click="expanded ? shrink() : expand()"
-          :class="[{ flex: !isFiltersActive }, { none: isFiltersActive }, {disabled:ready !== 2}]"
+          :class="[{ flex: !isFiltersActive }, { none: isFiltersActive }, {disabled:ready % 2 !== 0}]"
         >
           <span >Blog</span>
           <span>
@@ -130,7 +130,7 @@ export default {
     },
   },
   watch: {
-    articles(v) {
+    articles() {
       this.loading = false;
     },
   },

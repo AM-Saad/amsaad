@@ -240,7 +240,7 @@ body.search-pane--show .search-pane {
 }
 
 .column-head {
-  margin-bottom: 10vh;
+  margin-bottom: 5vw;
   padding: var(--m-padding);
 }
 
@@ -313,15 +313,17 @@ body.search-pane--show .search-pane {
   transition: background-size .6s cubic-bezier(.55, 0, .1, 1);
   font-size: 20px;
 }
-.items__title span{
+
+.items__title span {
   margin: 0 var(--s-margin);
 }
+
 .items__title:hover,
 .items__item:hover .items__item-title span {
   background-size: 100% 1px;
 }
 
-button.items__title{
+button.items__title {
   background-color: transparent;
   border: 0;
 }
@@ -405,6 +407,28 @@ a.button-pill:hover {
   height: 100%;
   z-index: 9999999;
   background-color: #000;
+  animation-name: flashRail;
+  animation-duration: 10s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes flashRail {
+  0% {
+    background-color: var(--main-color);
+  }
+  25% {
+    background-color: #000;
+  }
+  50% {
+    background-color: #000;
+  }
+  75% {
+    background-color: #000;
+  }
+  100% {
+    background-color: #000;
+  }
 }
 
 .rails [data-rail="one"] {
@@ -577,12 +601,68 @@ a.button-pill:hover {
 }
 
 
+.columns-footer {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 2px 4px 8px 0px rgb(161 161 161 / 37%), -2px -4px 8px 0px rgb(209 209 209 / 34%);
+  z-index: 25;
+  -webkit-transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.columns-footer__menu {
+  display: -webkit-box;
+  display: flex;
+  padding: 1.5vh;
+}
+
+.columns-footer__menu-item {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-flex: 0;
+  flex: 0 0 33.33%;
+}
+
+.columns-footer__menu-item .button-pill {
+  border: 1px solid transparent;
+  -webkit-transition: border-color 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: border-color 0.6s cubic-bezier(0.55, 0, 0.1, 1);
+  min-width: 20vw;
+  text-align: center;
+}
+
+.columns-footer__menu-item .button-pill.active {
+  border: 1px solid #000;
+  background: var(--main-color);
+  color: #fff;
+}
+
+.columns-footer__buttons {
+  display: -webkit-box;
+  display: flex;
+  padding: 16px;
+}
+
+@media (max-width: 900px) {
+  .columns-footer {
+    display: block;
+  }
+}
+
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 
-  
+
   .form_inputs {
     width: 100% !important;
   }
 }
-
-

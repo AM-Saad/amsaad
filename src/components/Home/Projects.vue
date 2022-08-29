@@ -18,12 +18,12 @@
       <div class="flex f-space-between column-head">
         <button
           class="items__title"
-          :disabled="ready !== 2"
+          :disabled="ready % 2 !== 0"
           @click="expanded ? shrink() : expand()"
           :class="[
             { flex: !isFiltersActive },
             { none: isFiltersActive },
-            { disabled: ready !== 2 },
+            { disabled: ready % 2 !== 0 },
           ]"
         >
           <span>Portfolio</span>
@@ -70,7 +70,6 @@ import { mapState, mapGetters } from "vuex";
 import Filters from "./Filters.vue";
 import Reload from "../general/Reload.vue";
 
-let $ = require("jquery");
 
 export default {
   name: "Projetcs",

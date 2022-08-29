@@ -14,6 +14,7 @@ import LazyLoadDirective from "./directives/LazyLoadDirective.jsLazyLoadDirectiv
 
 import VueDragResize from 'vue-drag-resize'
 import VueMeta from 'vue-meta'
+import Vue2TouchEvents from 'vue2-touch-events'
 
 import hljs from 'highlight.js'
 hljs.configure({
@@ -33,12 +34,18 @@ import 'quill/dist/quill.bubble.css'
 import './registerServiceWorker'
 
 Vue.use(VueQuillEditor)
-
+Vue.use(Vue2TouchEvents, {
+  disableClick: false,
+  touchClass: '',
+  tapTolerance: 10,
+  touchHoldTolerance: 400,
+  swipeTolerance: 30,
+  longTapTimeInterval: 400,
+  namespace: 'touch'
+})
 Vue.component('vue-drag-resize', VueDragResize)
-
 Vue.use(moment)
 Vue.use(VueMeta)
-
 Vue.use(VDragged);
 
 
