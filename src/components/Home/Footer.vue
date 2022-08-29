@@ -24,9 +24,9 @@ export default {
 <style>
 .logo {
   position: absolute;
-  bottom: 20px;
-  right: 10px;
-  width: 45px;
+  bottom: 4.5rem;
+  right: 0;
+  width: 50px;
   z-index: 9;
 }
 .logo img {
@@ -51,7 +51,7 @@ export default {
 }
 .footer-meta .button-pill:last-child {
   background-color: var(--main-color);
-  color: #000;
+  color: #fff;
   padding: 0 4px;
 }
 

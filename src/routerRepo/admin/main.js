@@ -2,19 +2,19 @@ export default [
 
     {
         path: "/admin",
-        redirect: "/admin/dashboard",
+        redirect: "/admin/login",
     },
     {
         path: "/admin/login",
         name: "Login",
         component: () =>
-            import(/* webpackChunkName: "about" */ "../../components/Admin/pages/Login.vue"),
+            import(/* webpackChunkName: "about" */ "@/views/admin/Login.vue"),
     },
     {
         path: "/admin/dashboard",
         name: "dashboard",
         component: () =>
-            import(/* webpackChunkName: "Dashboard" */ "../../components/Admin/pages/Dashboard.vue"),
+            import(/* webpackChunkName: "Dashboard" */ "@/views/admin/Dashboard.vue"),
         meta: { requiredAuth: true },
 
     },
@@ -22,7 +22,7 @@ export default [
         path: "/admin/articles",
         name: "allarticles",
         component: () =>
-            import(/* webpackChunkName: "about" */ "../../components/Admin/articles/List.vue"),
+            import(/* webpackChunkName: "Articles" */ "@/views/admin/Articles.vue"),
         meta: { requiredAuth: true },
 
     },
@@ -30,7 +30,7 @@ export default [
         path: "/admin/articles/new/:id?",
         name: "newarticle",
         component: () =>
-            import(/* webpackChunkName: "about" */ "../../components/Admin/articles/Create.vue"),
+            import(/* webpackChunkName: "CreateArticle" */ "@/views/admin/CreateArticle.vue"),
         meta: {
             requiredAuth: true,
             sitemap: {
@@ -52,7 +52,7 @@ export default [
         path: "/admin/projects",
         name: "allprojects",
         component: () =>
-            import(/* webpackChunkName: "about" */ "../../components/Admin/projects/List.vue"),
+            import(/* webpackChunkName: "Projects" */ "@/views/admin/Projects.vue"),
         meta: { requiredAuth: true },
 
     },
@@ -60,7 +60,7 @@ export default [
         path: "/admin/projects/new/:id?",
         name: "newproject",
         component: () =>
-            import(/* webpackChunkName: "about" */ "../../components/Admin/projects/Create.vue"),
+            import(/* webpackChunkName: "CreateProject" */ "@/views/admin/CreateProject.vue"),
         meta: {
             requiredAuth: true,
             sitemap: {
@@ -82,7 +82,7 @@ export default [
         path: "/admin/category",
         name: "allcategory",
         component: () =>
-            import(/* webpackChunkName: "about" */ "../../components/Admin/category/List.vue"),
+            import(/* webpackChunkName: "Categories" */ "@/views/admin/Categories.vue"),
         meta: { requiredAuth: true },
 
     },
@@ -90,7 +90,7 @@ export default [
         path: "/admin/category/new/:id?",
         name: "newcategory",
         component: () =>
-            import(/* webpackChunkName: "about" */ "../../components/Admin/category/Create.vue"),
+            import(/* webpackChunkName: "CreateCategory" */ "@/views/admin/CreateCategory.vue"),
         meta: {
             requiredAuth: true,
             sitemap: {

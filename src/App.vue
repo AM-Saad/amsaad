@@ -15,14 +15,22 @@
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
     />
-    <link href="https://cdn.quilljs.com/1.2.6/quill.bubble.css" rel="stylesheet" />
-    <link href="https://cdn.quilljs.com/1.2.6/quill.core.css" rel="stylesheet" />
-    <link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet" />
-    <link rel="icon" href=" https://i.im.ge/2021/09/15/TwOiA4.png">
+    <link
+      href="https://cdn.quilljs.com/1.2.6/quill.bubble.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.quilljs.com/1.2.6/quill.core.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.quilljs.com/1.2.6/quill.snow.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href=" https://i.im.ge/2021/09/15/TwOiA4.png" />
 
-
-    <SearchComponent></SearchComponent>
-    <MessageComponent v-if="msg" :msg="msg"></MessageComponent>
+    <SearchComponent />
+    <MessageComponent />
     <!-- <div class="wrapper"> -->
     <main class="transition-fade">
       <div class="router-view">
@@ -48,19 +56,16 @@ export default {
     return {
       loading: true,
       prevHeight: 0,
-      transitionName: ""
+      transitionName: "",
     };
   },
   components: {
-    MessageComponent: MessageComponent,
-    SearchComponent: SearchComponent
+    MessageComponent,
+    SearchComponent: SearchComponent,
   },
-  props: {},
   computed: {
-    ...mapState(["msg", "pageTransition", "categories"]),
-    // ...mapState('admin',["msg"]),
-    ...mapActions(["logout"])
-    // ...mapMutations("studio", ["checkauthintecated"])
+    ...mapState([  "categories"]),
+    ...mapActions(["logout"]),
   },
 
   metaInfo: {
@@ -71,42 +76,41 @@ export default {
         name: "description",
         content:
           "Software house  website  web app  softwares  digital agency  amsstudio amsstudio.me  ams studio  applications  articles  blog  software  websites company community educational javascript web development node.js web designing developing css js apps web apps",
-        vmid: "desc"
+        vmid: "desc",
       },
       {
         name: "Keywords",
         content:
           "Software company  website  web app  softwares  digital agency  amsstudio amsstudio.me  ams studio  applications  articles  blog  software  websites company community educational javascript web development node.js web designing developing css js apps web apps",
-        vmid: "desc"
+        vmid: "desc",
       },
       {
         name: "og:description	",
         content:
           "Software company  website  web app  softwares  digital agency  amsstudio amsstudio.me  ams studio  applications  articles  blog  software  websites company community educational javascript web development node.js web designing developing css js apps web apps",
-        vmid: "ogdesc"
+        vmid: "ogdesc",
       },
       {
         property: "og:title",
-        content: "AMS STUDIO"
+        content: "AMS STUDIO",
       },
       {
         property: "og:image",
-        content: "https://i.ibb.co/SySVbCZ/Circle2.png"
+        content: "https://i.ibb.co/SySVbCZ/Circle2.png",
       },
       {
         property: "og:url",
-        content: "https://www.amsstudio.me"
-      }
-    ]
+        content: "https://www.amsstudio.me",
+      },
+    ],
   },
 
   created() {
-    console.log(this);
 
     this.$store.commit("studio/checkauthintecated");
 
     if (this.categories.length == 0) {
-      this.$store.dispatch({ type: "getCategories" });
+      this.$store.dispatch({ type: "fetch_categories" });
     } else {
       this.loading = false;
     }
@@ -125,10 +129,10 @@ export default {
           this.transitionName = "slide-right";
         }
       }
-    }
+    },
   },
 
-  destroyed() {}
+  destroyed() {},
 };
 </script>
 
@@ -143,7 +147,7 @@ export default {
 }
 a:visited {
   color: #000;
-  text-decoration: none
+  text-decoration: none;
 }
 
 .slide-left,

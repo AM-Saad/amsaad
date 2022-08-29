@@ -5,93 +5,46 @@
     id="colOne"
     data-size="1"
     ref="articles"
-    :class="[{'loading': loading}]"
+    :class="[{ loading: loading }, { active: isActiveColumn }]"
   >
     <ItemLoading v-if="loading"></ItemLoading>
-    <div class="reload" v-if="reload">
-      <h1>Hmmm...</h1>
-      <p>It seems you lost your connection, please try again.</p>
-      <button class="button-pill bg-main" @click="getArticles()">Reload</button>
-    </div>
+
+    <!-- Reload if request failed -->
+    <Reload :reload="reload" @reload="getArticles()" />
 
     <div v-if="!loading">
       <a class="enlarge button-pill" ref="button" @click="expand()">Articles</a>
       <div class="flex f-space-between column-head">
-        <div class="items__title" :class="[{'flex': !activefilters}, { 'none': activefilters}]">
-          <span @click="expanded ? shrink() : expand()">Blog</span>
+        <button
+          class="items__title"
+          :disabled="ready !== 2"
+          @click="expanded ? shrink() : expand()"
+          :class="[{ flex: !isFiltersActive }, { none: isFiltersActive }, {disabled:ready !== 2}]"
+        >
+          <span >Blog</span>
           <span>
             <i
               class="fas"
-              :class="[{'fa-arrows-alt-h': !expanded}, { 'fa-times': expanded}]"
-              @click="expanded? shrink():expand()"
+              :class="expanded ? 'fa-times' : 'fa-arrows-alt-h'"
             ></i>
           </span>
-        </div>
-        <div class="filters" style="right: 124px;">
-          <div :class="[{'none': !activefilters}, { 'filters__filters': activefilters}]">
-            <div class="filters__filter-set">
-              <a
-                class="button-pill button-pill--small active all"
-                @click="filter('all', $event)"
-              >All</a>
+        </button>
 
-              <a
-                v-for="c in categories"
-                :key="c._id"
-                class="button-pill button-pill--small"
-                :data-article-id="c.name"
-                @click="filter(c.name , $event)"
-              >{{c.name}}</a>
-            </div>
-          </div>
-          <div class="filters__toggle">
-            <div class="button-extend button-extend--small button-extend--with-hover show">
-              <div class="button-extend__icon" v-on:click="activefilters = !activefilters">
-                <svg
-                  v-if="!activefilters"
-                  class="icon-filter"
-                  width="7"
-                  height="5"
-                  viewBox="0 0 7 5"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M0 4.5H7" stroke="black" />
-                  <path d="M0 0.5H7" stroke="black" />
-                </svg>
-
-                <svg
-                  v-if="activefilters"
-                  class="icon-cross"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 10 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M0.146484 9.14722L9.14722 0.146484L9.85433 0.853591L0.853591 9.85433L0.146484 9.14722Z"
-                    fill="black"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M0.853637 0.14712L9.85361 9.14706L9.1465 9.85417L0.146531 0.854228L0.853637 0.14712Z"
-                    fill="black"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Filters
+          :isActive="isFiltersActive"
+          :val="filterVal"
+          @filter="filter"
+          @toggleFilter="isFiltersActive = !isFiltersActive"
+        />
       </div>
-      <div class="items" v-if="articles.length > 0">
-        <!-- <img id="loading" v-if="fetching" class="loading" src="@/assets/loading2.gif" /> -->
-        <Article v-for="article in articles" :key="article._id" :article="article"></Article>
+      <div class="items" v-if="items.length > 0">
+        <Article
+          v-for="article in items"
+          :key="article._id"
+          :article="article"
+        ></Article>
       </div>
-      <div v-if="articles.length == 0">
+      <div v-if="items.length == 0">
         <img
           class="w-75 m-auto block"
           src="../../assets/images/noresult.svg"
@@ -109,33 +62,38 @@ import Article from "@/components/Articles/article-components/ArticleComponent";
 import ItemLoading from "@/components/general/ItemLoading.vue";
 import { mapGetters, mapState } from "vuex";
 import * as helpers from "@/helpers/home";
-let $ = require("jquery");
+import Filters from "./Filters.vue";
+import Reload from "@/components/general/Reload.vue";
 
 export default {
   name: "Articles",
   data() {
     return {
-      activefilters: false,
-      allarticles: [],
+      isFiltersActive: false,
+      items: [],
       expanded: false,
       loading: false,
-      reload: false
+      reload: false,
+      filterVal: "all",
     };
   },
   components: {
     Article,
-    ItemLoading
+    ItemLoading,
+    Filters,
+    Reload,
   },
+  props: ["activeColumn"],
   computed: {
-    ...mapState(["one", "two", "colWidth", "categories", "url"]),
-    ...mapState("studio", ["fetching", "filtredArticles", "articles"]),
-    ...mapGetters("studio", ["filterArticle"])
+    ...mapState(["two"]),
+    ...mapState("studio", ["articles", "ready"]),
+    ...mapGetters("studio", ["filterArticle"]),
+    isActiveColumn: function() {
+      return this.activeColumn === "one" ? true : false;
+    },
   },
-  mounted() {
-    this.$emit("created", { col: "articles" });
-  },
+
   created() {
-    // this.allarticles = this.articles;
     this.getArticles();
   },
   methods: {
@@ -143,20 +101,17 @@ export default {
       this.loading = true;
       this.reload = false;
 
-      const res = await this.$store.dispatch({
-        type: "studio/fetchArticles"
-      });
-  
-      if (!res) {
-        this.loading = false;
-        this.reload = true;
-      }
+      const res = await this.$store.dispatch("studio/fetch_articles");
+
+      this.loading = false;
+      if (!res) return (this.reload = true);
+      this.items = this.articles;
     },
     shrink() {
       this.expanded = false;
       helpers.changePositions({
         one: { right: 66.6, left: 33.3 },
-        two: { right: 33.3, left: 66.6 }
+        two: { right: 33.3, left: 66.6 },
       });
       helpers.shrink();
     },
@@ -165,28 +120,23 @@ export default {
 
       helpers.changePositions({
         one: { right: 10, left: this.two.min - 5 },
-        two: { right: 100 - this.two.min, left: this.two.min }
+        two: { right: 100 - this.two.min, left: this.two.min },
       });
     },
-    filter(type, e) {
-      $(".filters__filter-set .button-pill").removeClass("active");
-      $(e.target).addClass("active");
-      this.filterArticle(type);
-    }
+    filter(type) {
+      this.filterVal = type;
+      const articles = this.filterArticle(type);
+      this.items = articles;
+    },
   },
   watch: {
-    filtredArticles(v) {
-      this.allarticles = v;
-    },
     articles(v) {
-      this.allarticles = v;
       this.loading = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #editBox {
   position: absolute;
@@ -202,6 +152,9 @@ export default {
 .allarticles #loading {
   height: 35px;
   width: 100px;
+}
+.disabled{
+  cursor: progress;
 }
 #imgPrv {
   display: none;

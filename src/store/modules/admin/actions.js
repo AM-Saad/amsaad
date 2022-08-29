@@ -47,6 +47,8 @@ const deleteArticle = async ({ commit, state, rootState }, { data }) => {
 
 
 
+
+
 const getProjects = async ({ commit, rootState, state }) => {
   const res = await Admin.getProjects(state.jwt, rootState.url)
   checkAuth(res, commit)
@@ -58,7 +60,7 @@ const addProject = async ({ commit, rootState, state }, { data }) => {
   const res = await Admin.addProject(data, state.jwt, rootState.url)
   checkAuth(res, commit)
   res.state && commit('addProject', res.json.project)
-  
+
   commit('msg', { msg: res.msg, type: res.state ? 'success' : 'warning' }, { root: true })
 
   return res.state ? res.json.project : false
@@ -66,7 +68,7 @@ const addProject = async ({ commit, rootState, state }, { data }) => {
 const editProject = async ({ commit, rootState, state }, { data, id }) => {
   const res = await Admin.editProject(data, id, state.jwt, rootState.url)
   checkAuth(res, commit)
-  commit('msg', { msg: 'Updated', type: res.state ? 'success' : 'warning' }, { root: true })
+  commit('msg', { msg: res.msg, type: res.state ? 'success' : 'warning' }, { root: true })
   return res.state ? true : false
 };
 const deleteProject = async ({ commit, state, rootState }, { data }) => {
@@ -77,6 +79,15 @@ const deleteProject = async ({ commit, state, rootState }, { data }) => {
   return res.state ? true : false
 };
 
+
+const deleteImage = async ({ commit, state, rootState }, { name, source, content, id }) => {
+
+  const res = await Admin.deleteImage(name, state.jwt, `${rootState.url}/admin/media?id=${id}&&source=${source}&&contentid=${content}`)
+
+  commit('msg', { msg: res.msg, type: res.state ? 'success' : 'warning' }, { root: true })
+
+  return res.state ? true : false
+}
 
 
 
@@ -132,6 +143,8 @@ export default {
   addProject,
   editProject,
   deleteProject,
+
+  deleteImage,
 
   getCategories,
   addCategory,

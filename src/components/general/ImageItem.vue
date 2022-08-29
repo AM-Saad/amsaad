@@ -34,6 +34,9 @@ export default {
 	 justify-content: center;
 	 align-items: center;
 	 border-radius: 4px;
+   
+       max-height: 299px;
+    overflow: hidden;
 }
  .image__wrapper.loaded .image__item {
 	 visibility: visible;
@@ -46,6 +49,7 @@ export default {
 }
  .image__item {
 	 width: 100%;
+       min-height: 160px; 
 	 border-radius: 4px;
 	 transition: all 0.4s ease-in-out;
 	 opacity: 0;

@@ -90,15 +90,7 @@ export default {
       this.windowWidth = window.innerWidth;
     });
   },
-  async created() {
-    // if (this.articles.length == 0) {
-    //   this.$store.dispatch({ type: "studio/getAllArticles" });
-    // }
-    // if (this.projects.length == 0) {
-    //   this.$store.dispatch({ type: "studio/getAllProjects" });
-    // }
-    // helpers.calcColumn();
-  },
+
 
   methods: {
     start() {

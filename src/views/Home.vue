@@ -2,21 +2,39 @@
   <div>
     <loadingCom v-if="ready != 2"></loadingCom>
     <div class="columns opacity-1">
-      <Articles ref="articles" v-on:created="checkFiltertion"></Articles>
-      <Projects ref="projects"  v-on:created="checkFiltertion"></Projects>
-      <Studio ref="studio"></Studio>
+      <Articles ref="articles" :activeColumn="activeColumn" />
+      <Projects ref="projects" :activeColumn="activeColumn" />
+      <Studio ref="studio" :activeColumn="activeColumn" />
       <Rails :loading="loading" ref="rails" :refs="this.$refs"></Rails>
     </div>
     <div class="columns-footer">
       <div class="columns-footer__menu">
-        <div class="columns-footer__menu-item" @click="activeColumn('one', $event)">
-          <div class="button-pill" data-column="one">Blog</div>
+        <div class="columns-footer__menu-item" @click="activateColumn('one')">
+          <div
+            class="button-pill"
+            :class="{ active: activeColumn === 'one' }"
+            data-column="one"
+          >
+            Blog
+          </div>
         </div>
-        <div class="columns-footer__menu-item" @click="activeColumn('two', $event)">
-          <div class="button-pill active" data-column="two">Portfolio</div>
+        <div class="columns-footer__menu-item" @click="activateColumn('two')">
+          <div
+            class="button-pill"
+            :class="{ active: activeColumn === 'two' }"
+            data-column="two"
+          >
+            Portfolio
+          </div>
         </div>
-        <div class="columns-footer__menu-item" @click="activeColumn('three', $event)">
-          <div class="button-pill" data-column="three">Studio</div>
+        <div class="columns-footer__menu-item" @click="activateColumn('three')">
+          <div
+            class="button-pill"
+            :class="{ active: activeColumn === 'three' }"
+            data-column="three"
+          >
+            Studio
+          </div>
         </div>
       </div>
     </div>
@@ -41,7 +59,8 @@ export default {
       shiftX: null,
       shiftY: null,
       loading: true,
-      enter: true
+      enter: true,
+      activeColumn: "two",
     };
   },
   components: {
@@ -49,11 +68,10 @@ export default {
     Projects: Projects,
     Studio: Studio,
     Rails: Rails,
-    loadingCom: loadingCom
+    loadingCom: loadingCom,
   },
   computed: {
-    ...mapState(["one", "two", "colWidth"]),
-    ...mapState("studio", ["articles", "projects", "ready"])
+    ...mapState("studio", ["ready"]),
   },
   mounted() {
     if (this.ready == 2) this.start();
@@ -63,34 +81,17 @@ export default {
       () => (this.windowWidth = window.innerWidth)
     );
   },
-  async created() {},
   methods: {
     start() {
       helpers.shrink();
       helpers.calcColumn();
       this.enter = false;
     },
-    checkFiltertion() {
-      const type = this.$route.query.type;
-      const category = this.$route.params.category;
-      if (type && category) {
-        if (type === "article") {
-          this.$refs.articles.activefilters = true;
-          document.querySelector(`a[data-article-id="${category}"]`).click();
-          this.$refs.articles.expand();
-        } else {
-          this.$refs.projects.activefilters = true;
-          document.querySelector(`a[data-project-id="${category}"]`).click();
-          this.$refs.projects.expand();
-        }
-      }
+
+    activateColumn(col) {
+      console.log(col);
+      this.activeColumn = col;
     },
-    activeColumn(col) {
-      $(".column").addClass("none");
-      $(`[data-column]`).removeClass("active");
-      $(".column").removeClass("none");
-      $(`[data-column="${col}"]`).addClass("active");
-    }
   },
   watch: {
     windowWidth() {
@@ -102,8 +103,8 @@ export default {
           this.start();
         }, 2000);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

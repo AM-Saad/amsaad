@@ -5,7 +5,7 @@
       <div data-rail="two" class="rail loading-rails" style="left: 66.6%;"></div>
     </div>
     <div class="logo">
-      <img src="@/assets/images/full-vertical.png" alt="logo" />
+      <img src="@/assets/images/horizontal.png" alt="logo" />
 
     </div>
   </div>

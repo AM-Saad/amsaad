@@ -2,8 +2,8 @@ import { request } from './request'
 
 export default class Studio {
 
-    static async fetchArticles(url) { return await request(`${url}/feed/articles`, 'get', {}, true) }
-    static async getAllProjects(url) { return await request(`${url}/feed/projects`, 'get', {}, true) }
+    static async fetch_articles(url) { return await request(`${url}/feed/articles`, 'get', {}, true) }
+    static async fetch_projects(url) { return await request(`${url}/feed/projects`, 'get', {}, true) }
     static async getcomments(id, jwt, url) { return await request(jwt, `${url}/feed/comments/${id}`, 'get', {}, true) }
     static async addcomment(id, comment, jwt, url) { return await request(jwt, `${url}/feed/comments/${id}`, 'put', JSON.stringify({ comment: comment }), true) }
     static async getLikes(id, jwt, url) { return await request(jwt, `${url}/feed/likes/${id}`, 'get', { message: "Liked" }, true) }

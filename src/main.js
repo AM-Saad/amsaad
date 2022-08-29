@@ -5,14 +5,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "@/assets/css/main.css"
-import "@/assets/css/classes.css"
+import "@/assets/css/common.css"
 import "@/assets/css/admin.css"
 import store from "./store";
 import * as moment from 'moment'
 import VDragged from "v-dragged";
 import LazyLoadDirective from "./directives/LazyLoadDirective.jsLazyLoadDirective";
 
-// import VueHead from 'vue-head'
 import VueDragResize from 'vue-drag-resize'
 import VueMeta from 'vue-meta'
 
@@ -38,7 +37,6 @@ Vue.use(VueQuillEditor)
 Vue.component('vue-drag-resize', VueDragResize)
 
 Vue.use(moment)
-// Vue.use(VueHead)
 Vue.use(VueMeta)
 
 Vue.use(VDragged);

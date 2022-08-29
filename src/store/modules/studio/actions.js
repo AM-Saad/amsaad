@@ -9,35 +9,49 @@ const checkAuth = (res, dispatch) => {
 }
 
 
-const fetchArticles = async ({ commit, state, rootState, dispatch }) => {
-  const res = await Studio.fetchArticles(rootState.url)
-  const blogArticles = await fetch(
-    "https://abdelrahman-saad.cc/api/articles"
-  );
-  const blogArticlesJson = await blogArticles.json();
-  res.json.forEach(i => {
-    i.image = rootState.url + "/" + i.image;
-    i.source = "server";
-  });
+const fetch_articles = async ({ commit, state, rootState }) => {
+  try {
+    
+    const res = await Studio.fetch_articles(rootState.url)
 
-  blogArticlesJson.articles.forEach(i => {
-    i.image = "https://abdelrahman-saad.cc/" + i.image;
-    i.source = "api";
-  });
-  console.log(blogArticlesJson)
+    // Fetch articles from the my blog
+    const blogArticles = await fetch(
+      "https://abdelrahman-saad.cc/api/articles"
+    );
 
-  let allarticles = [...blogArticlesJson.articles, ...res.json];
-  
-  state.ready += 1
-  commit('setArticles', allarticles)
-  return res.json
+    const { articles } = await blogArticles.json();
+    if (res.json.length > 0) {
+      res.json.forEach(i => {
+        i.image = rootState.url + "/" + i.image;
+        i.source = "server";
+      });
+    }
+
+    if (articles.length > 0) {
+      articles.forEach(i => {
+        i.image = "https://abdelrahman-saad.cc/" + i.image;
+        i.source = "api";
+      });
+    }
+
+
+    let allarticles = [...articles, ...res.json];
+
+    state.ready += 1
+    commit('setArticles', allarticles)
+    return res.state ? true : false
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+
+
 };
 
-const getAllProjects = async ({ commit, state, rootState, dispatch }) => {
-  const res = await Studio.getAllProjects(rootState.url)
+const fetch_projects = async ({ commit, state, rootState, dispatch }) => {
+  const res = await Studio.fetch_projects(rootState.url)
   checkAuth(res, dispatch)
-  // !res.state && commit('msg', { msg: res.msg, type: 'warning' }, { root: true })
-  res.state && commit('updateProjects', res.json.reverse())
+  res.state && commit('setProjects', res.json.reverse())
   state.ready += 1
   return res.state ? true : false
 };
@@ -66,17 +80,13 @@ const login = async ({ commit, rootState }, { data }) => {
 }
 
 
-const setArticles = async ({ commit, rootState }, { articles }) => {
-  return commit('setArticles', articles)
 
-}
 
 export default {
-  fetchArticles,
-  getAllProjects,
+  fetch_articles,
+  fetch_projects,
   react,
   signup,
   login,
   newview,
-  setArticles
 };

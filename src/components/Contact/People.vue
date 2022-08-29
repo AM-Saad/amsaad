@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import Project from "@/components/Projects/project-components/ProjectComponent";
+import Project from "@/components/Projects/project-components/Project";
 import * as helpers from "@/helpers/home";
 
 import { mapState, mapGetters } from "vuex";
