@@ -1,8 +1,7 @@
 <template>
   <div class="loading-item">
-    <div class="logo">
-      <img src="@/assets/images/full-vertical.png" alt="logo" />
-
+    <div class="logo" v-if="!showlogo">
+      <img src="@/assets/images/horizontal.png" alt="logo" />
     </div>
     <div class="loading-item-cell">
       <div class="image"></div>
@@ -36,29 +35,40 @@
 
 <script>
 export default {
-  name: "Loading"
+  name: "Loading",
+  props:['showlogo']
 };
 </script>
 
-<style>
+<style scoped>
 .loading-item {
   padding-top: 17vh;
-  background: #fff;
   height: 100%;
-  width: 90%;
+  width: 98%;
   display: flex;
   flex-direction: column;
   z-index: 9999;
+  border-radius: 10px;
 }
-.loading-item .logo{
+.logo {
   position: fixed !important;
+  bottom: 4.5rem;
+  right: 0;
+  width: 50px;
+  z-index: 9;
+}
+.logo img{
+  height: 100%;
+  width: 100%;
 }
 
 .loading-item-cell {
   margin-bottom: 30px;
   height: 300px;
   padding: var(--m-padding);
-  border: 1px solid #eee;
+  border: 1.4px solid rgb(224 224 224 / 69%);
+
+  border-radius: 10px;
 }
 
 @-webkit-keyframes placeHolderShimmer {
@@ -81,8 +91,8 @@ export default {
 .animated-background,
 .text-line,
 .image {
-  -webkit-animation-duration: 1.25s;
-  animation-duration: 1.25s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-iteration-count: infinite;
@@ -107,5 +117,14 @@ export default {
   height: 10px;
   width: 100%;
   margin: 4px 0;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+
+  .loading-item {
+    width: 87%;
+    padding-top:4vh
+  }
+  
 }
 </style>

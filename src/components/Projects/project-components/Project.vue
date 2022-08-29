@@ -7,10 +7,10 @@
           v-if="project.image"
           :source="this.url +'/'+ project.image"
         ></ImageItem>
-        <div class="items__item-date">{{project.date}}</div>
         <div class="items__item-title">
           <span class>{{project.title}}</span>
         </div>
+        <div class="items__item-date">{{project.subtitle}}</div>
       </div>
     </router-link>
     <transition name="silde" mode="out-in">

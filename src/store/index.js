@@ -14,7 +14,7 @@ export default new Vuex.Store({
   },
   state: {
     categories: [],
-    url: "https://server.amsaad.co",
+    url: process.env.VUE_APP_API_URL,
     // url: "http://localhost:4000",
     msg: null,
     networkconnections: true,
@@ -37,24 +37,24 @@ export default new Vuex.Store({
   mutations: {
     msg(state, msg) {
       state.msg = msg
-      setTimeout(function () { state.msg = null }, 6000);
+      setTimeout(function () { state.msg = null }, 5000);
     },
 
-    updatecategories(state, data) {
-      state.categories = data
+    update_categories(state, data) {
+      state.categories = [...state.categories, ...data]
     }
   },
 
   actions: {
-    async  checkConnection({ state }) {
+    async checkConnection({ state }) {
 
       const res = await fetch("http://info.cern.ch/")
       state.networkconnections = !state.networkconnections
     },
-    async  getCategories({ commit, rootState }) {
-      const res = await Admin.getCategories(rootState.url)
+    async fetch_categories({ commit, rootState }) {
+      const res = await Admin.fetch_categories(rootState.url)
       !res.state && commit('msg', { msg: res.msg, type: res.state ? 'success' : 'warning' })
-      res.state && commit('updatecategories', res.json.categories)
+      res.state && commit('update_categories', res.json.categories)
       return res.state ? true : false
     }
   },

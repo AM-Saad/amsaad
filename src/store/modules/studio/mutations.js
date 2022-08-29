@@ -11,6 +11,7 @@ const authenticate = (state, authData) => {
   localStorage.setItem('uexpiryd', state.sessionExpiryDate)
   localStorage.setItem('u', state.user)
 }
+
 const checkauthintecated = (state) => {
   const expiryDate = localStorage.getItem("uexpiryd");
   const jwtToken = localStorage.getItem("ut");
@@ -29,25 +30,18 @@ const logout = (state) => {
 
   localStorage.removeItem('jwt')
   localStorage.removeItem('sessionExpiryDate')
-  // state.user = null
   state.jwt = null
-  // state.expiryDate = null
   state.isAuth = false
 
 }
-const addnew = (state, expenses) => {
-  state.allExpenses.push(expenses)
-}
+
 const setArticles = (state, articles) => {
-  console.log(articles)
   state.articles = articles;
 };
 
-const deleteone = (state, id) => {
-  state.allExpenses = state.allExpenses.filter(i => i._id.toString() != id.toString())
-};
 
-const updateProjects = (state, projects) => {
+
+const setProjects = (state, projects) => {
   state.projects = projects;
 };
 const updateReaction = (state, data) => {
@@ -56,5 +50,5 @@ const updateReaction = (state, data) => {
 };
 
 export default {
-  addnew, setArticles, deleteone, updateProjects, updateReaction, authenticate, checkauthintecated, logout
+  setArticles, setProjects, updateReaction, authenticate, checkauthintecated, logout
 };

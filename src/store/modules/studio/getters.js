@@ -22,7 +22,7 @@ const filterProject = (state) => (category) => {
         state.filtredProjects = state.projects
         return state.projects
     }
-    const projects = state.projects.filter(i => i.category.name === category)
+    const projects = state.projects.filter(i => i.category === category)
     state.filtredProjects = projects
     return projects
 }

@@ -12,6 +12,7 @@
         <div class="items__item-title">
           <span class>{{article.title}}</span>
         </div>
+  
       </div>
     </router-link>
     <transition name="silde" mode="out-in">
@@ -23,8 +24,6 @@
 <script>
 import ImageItem from "../../general/ImageItem";
 import { mapState } from "vuex";
-// import CommentsComponent from "@/components/Articles/article-components/CommentsComponent";
-// import LikesComponent from "@/components/Articles/article-components/LikesComponent";
 export default {
   name: "ArticleComponent",
   data() {

@@ -27,7 +27,6 @@ const checkauthintecated = (state) => {
   }
 }
 
-// const addnew = (state, expenses) => { state.allExpenses.push(expenses) }
 const updatecategories = (state, categories) => { state.allcategories = categories; };
 
 const updatearticles = (state, articles) => { state.allarticles = articles; };
@@ -50,12 +49,7 @@ const logout = (state) => {
   state.isAuth = false
 
 }
-const msg = (state, msg) => {
-  state.msg = msg
-  setTimeout(function () { state.msg = null }, 6000);
-
-}
 
 export default {
-  authenticate, checkauthintecated, updatearticles, deletearticle, logout, msg, setProjects, addProject, deleteproject, updatecategories
+  authenticate, checkauthintecated, updatearticles, deletearticle, logout, setProjects, addProject, deleteproject, updatecategories
 };

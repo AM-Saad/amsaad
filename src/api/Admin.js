@@ -19,13 +19,16 @@ export default class Admin {
     static async deleteArticle(id, jwt, url) { return await request(`${url}/admin/articles/${id}`, 'delete', {}, false, jwt) }
 
 
+    static async deleteImage(name, jwt, url) { return await request(`${url}`, 'put', JSON.stringify({ name: name }), true, jwt) }
+
+
 
     static async getUser(id, jwt, url) { return await request(`${url}/admin/users/${id}`, 'get', {}, false, jwt) }
     static async getUsers(jwt, url) { return await request(`${url}/admin/users`, 'get', {}, false, jwt) }
     static async deleteUsers(id, jwt, url) { return await request(`${url}/admin/users/${id}`, 'delete', {}, false, jwt) }
 
 
-    static async getCategories(url) { return await request(`${url}/admin/category/`, 'get', {}, true) }
+    static async fetch_categories(url) { return await request(`${url}/admin/category/`, 'get', {}, true) }
     static async editCategory(data, id, jwt, url) { return await request(`${url}/admin/category/${id}`, 'put', data, false, jwt) }
     static async addCategory(data, jwt, url) { return await request(`${url}/admin/category`, 'post', data, false, jwt) }
     static async deleteCategory(id, jwt, url) { return await request(`${url}/admin/category/${id}`, 'delete', {}, false, jwt) }

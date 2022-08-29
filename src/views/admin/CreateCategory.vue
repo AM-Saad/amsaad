@@ -1,7 +1,7 @@
 <template>
   <form
     style="background-color: transparent"
-    class="parent-card form"
+    class="form"
     method="POST"
     enctype="multipart/form-data"
   >

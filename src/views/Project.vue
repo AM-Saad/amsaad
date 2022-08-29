@@ -1,12 +1,7 @@
 <template>
   <div>
-    <div class="reload" v-if="reload">
-      <h1>Hmmm...</h1>
-      <p>It seems you lost your connection, please try again.</p>
-      <button class="button-pill bg-main" @click="getProject($route.params.id)">
-        Reload
-      </button>
-    </div>
+    <Reload :reload="reload" @reload="getProject($route.params.id)" />
+
     <div :class="{ 'loader-effect': loading }">
       <div v-if="!loading">
         <div class="close">
@@ -14,30 +9,7 @@
             :to="{ name: 'home' }"
             class="button-pill button-pill--icon m-medium"
           >
-            <svg
-              data-v-4fdd230d
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon-cross"
-            >
-              <path
-                data-v-4fdd230d
-                d="M0.146484 9.14722L9.14722 0.146484L9.85433 0.853591L0.853591 9.85433L0.146484 9.14722Z"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                fill="black"
-              />
-              <path
-                data-v-4fdd230d
-                d="M0.853637 0.14712L9.85361 9.14706L9.1465 9.85417L0.146531 0.854228L0.853637 0.14712Z"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                fill="black"
-              />
-            </svg>
+            <cross-icon />
           </router-link>
         </div>
         <div class="hero">
@@ -51,123 +23,17 @@
             <div class="hero__title">{{ project.title }}</div>
 
             <a class="hero__arrow hide" href="#project">
-              <svg
-                fill="none"
-                height="11"
-                viewBox="0 0 12 11"
-                width="12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g stroke="#000">
-                  <path d="m5.98535 0v10" />
-                  <path d="m10.9706 4.98528-4.98525 4.98528-4.98528-4.98528" />
-                </g>
-              </svg>
+              <down-arrow-icon height="25" width="25" />
             </a>
           </div>
         </div>
         <div class="background background-white">
           <div class="meta line-background" data-background-color="white">
             <h2 class="meta__subtitle">{{ project.subtitle }}</h2>
-
-            <div class="meta__share">
-              <a
-                class="button-extend facebook"
-                target="_blank"
-                href="https://www.facebook.com/sharer.php?u=https://www.carr.net.au/project/norton-rose-fulbright-melbourne/"
-              >
-                <div class="button-extend__text-wrapper">
-                  <div class="button-extend__text">Share</div>
-                </div>
-                <div class="button-extend__icon">
-                  <svg
-                    fill="none"
-                    height="12"
-                    viewBox="0 0 7 12"
-                    width="7"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="m4.65925 11.9995v-5.13897h1.72493l.25807-2.00289h-1.983v-1.2789c0-.57978.16111-.97509.99249-.97509l1.06062-.0005v-1.791057c-.18348-.024364-.81299-.079061-1.54543-.079061-1.52951 0-2.5762.933318-2.5762 2.647308v1.4773h-1.729402v2.00289h1.729402v5.13947h2.06852z"
-                      fill="#000"
-                    />
-                  </svg>
-                </div>
-              </a>
-              <br />
-              <a
-                class="button-extend twitter"
-                target="_blank"
-                href="https://twitter.com/intent/tweet?url=https://www.carr.net.au/project/norton-rose-fulbright-melbourne/&amp;text=Norton Rose Fulbright Melbourne"
-              >
-                <div class="button-extend__text-wrapper">
-                  <div class="button-extend__text">Tweet</div>
-                </div>
-                <div class="button-extend__icon">
-                  <svg
-                    fill="none"
-                    height="10"
-                    viewBox="0 0 12 10"
-                    width="12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="m10.318 2.69436-.2187.15819.0122.26965c.0042.09188.0063.18427.0063.27716 0 2.85055-2.16732 6.10058-6.10058 6.10058-.54827 0-1.07903-.07268-1.58387-.20883.65166-.18547 1.25108-.49547 1.7706-.90256l1.10745-.86781-1.40672-.02567c-.52254-.00954-.99175-.23928-1.31808-.6006.10881-.01638.21563-.03896.3201-.06732l-.03281-.97281c-.59-.11815-1.07686-.52263-1.31032-1.06186.12627.02159.25537.03473.38665.03879l1.74476.05394-1.45161-.96949c-.489-.32659-.8098-.88354-.8098-1.51499 0-.07248.00425-.14395.01251-.21418 1.19445 1.14847 2.79098 1.88262 4.55826 1.97134l.66366.03332-.15181-.64692c-.03077-.1311-.04693-.26957-.04693-.41449 0-1.00465.81496-1.81974 1.82019-1.81974.52337 0 .99604.22091 1.32881.57537l.1895.20184.27164-.05349c.0524-.01031.1044-.02141.1562-.03329l.2056.60121c-.0405.03164-.0816.06254-.1232.09266z"
-                      fill="#000"
-                      stroke="#000"
-                    />
-                  </svg>
-                </div>
-              </a>
-              <br />
-              <a
-                class="button-extend pinterest"
-                target="_blank"
-                href="http://pinterest.com/pin/create/link/?url=https://www.carr.net.au/project/norton-rose-fulbright-melbourne/"
-              >
-                <div class="button-extend__text-wrapper">
-                  <div class="button-extend__text">Pin</div>
-                </div>
-                <div class="button-extend__icon">
-                  <svg
-                    fill="none"
-                    height="12"
-                    viewBox="0 0 10 12"
-                    width="10"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="m2.1736 9.56524c-.15723.64846-.09537 1.56276-.02706 2.15686.02934.2552.40782.378.53486.1793.31899-.4989.7965-1.3168.97307-1.96895.09537-.35113.48782-1.78533.48782-1.78533.25518.46673 1.00141.86237 1.79469.86237 2.36177 0 4.06302-2.0833 4.06302-4.67166 0-2.48141-2.11045-4.33783-4.82665-4.33783-3.37866 0-5.17335 2.17541-5.17335 4.54493 0 1.10161.610904 2.47337 1.58912 2.90982.14822.06614.22748.03647.26163-.10077.02578-.10447.15789-.61448.21717-.85186.01933-.07542.00967-.14095-.05413-.21513-.32349-.37648-.58255-1.06885-.58255-1.71424 0-1.65675 1.30752-3.25972 3.53525-3.25972 1.92357 0 3.2704 1.2574 3.2704 3.05571 0 2.03199-1.06909 3.43961-2.46102 3.43961-.76878 0-1.3436-.61015-1.1593-1.35754.22039-.89267.64828-1.85643.64828-2.50058 0-.57677-.3222-1.05772-.99046-1.05772-.78554 0-1.41642.78015-1.41642 1.82427 0 .66518.23392 1.11522.23392 1.11522s-.77587 3.1472-.91829 3.73324z"
-                      fill="#000"
-                    />
-                  </svg>
-                </div>
-              </a>
-              <br />
-              <a
-                class="button-extend linkedin"
-                target="_blank"
-                href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.carr.net.au/project/norton-rose-fulbright-melbourne/&amp;title=http://Norton%20Rose%20Fulbright%20Melbourne&amp;summary=http://The%20new%20workplace%20fitout%20in%20Melbourne%20for%20law%20firm%20Norton%20Rose%20Fulbright%20draws%20reference%20to%20the%20acclaimed%20arts%20and%20culture%20that%20the%20city%20is%20renowned%20for,%20resulting%20in%20a%20flexible,%20modern%20and%20welcoming%20office."
-              >
-                <div class="button-extend__text-wrapper">
-                  <div class="button-extend__text">Share</div>
-                </div>
-                <div class="button-extend__icon">
-                  <svg
-                    fill="none"
-                    height="11"
-                    viewBox="0 0 11 11"
-                    width="11"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="m3.13518 10.9952h-2.10291v-6.7529h2.09897v6.7529zm-1.04949-7.6766c-.67214 0-1.218502-.54636-1.218502-1.21851 0-.67214.542432-1.218498 1.218502-1.218498.67214 0 1.21457.546358 1.21457 1.218498 0 .67215-.54243 1.21851-1.21457 1.21851zm8.91081 7.6766h-2.09899v-3.28213c0-.7822-.01179-1.79238-1.08879-1.79238-1.09272 0-1.25781.85295-1.25781 1.73342v3.34109h-2.09503v-6.7529h2.01249v.92371h.02751c.27908-.53064.96302-1.0888 1.98499-1.0888 2.12653 0 2.51953 1.39932 2.51953 3.21528v3.70271z"
-                      fill="#000"
-                    />
-                  </svg>
-                </div>
-              </a>
-            </div>
+            <ShareBoxVue
+              :url="url + '/project/' + project._id"
+              :title="project.title + ' - ' + project.subtitle"
+            />
             <div class="meta__tags">
               <router-link
                 :to="{
@@ -178,14 +44,6 @@
                 >{{ project.category }}</router-link
               >
             </div>
-            <!-- <div class="meta__tags">
-              <a
-                v-for="tag in project.tags"
-                :key="tag"
-                href="https://www.carr.net.au/#area-workplace"
-                class="button-pill"
-              >{{tag}}</a>
-            </div>-->
             <div class="meta__attributes">
               <div class="attribute" v-if="project.client">
                 <div class="attribute__title">Client</div>
@@ -197,7 +55,7 @@
               </div>
               <div class="attribute">
                 <div class="attribute__title">Status</div>
-                <div class="attribute__text">Completed 2020</div>
+                <div class="attribute__text">Completed {{ createdDate }}</div>
               </div>
 
               <div class="attribute">
@@ -219,11 +77,11 @@
             >
               <div
                 class="block-text__image"
-                :style="[i === 0 ? { order: '1' } : { order: '2' }]"
+                :style="[i % 2 === 0 ? { order: '1' } : { order: '2' }]"
               >
                 <img
                   class="blur show"
-                  :src="'https://ams-server.xyz' + c.image"
+                  :src="url + c.image"
                   alt
                   data-gallery-image="https://www.carr.net.au/wp-2020/wp-content/uploads/2020/09/carr_nortonroseVIC-248-LR.jpg"
                   data-gallery-caption
@@ -233,7 +91,7 @@
               <div
                 class="block-text__text"
                 data-footnotes
-                :style="[i === 0 ? { order: '2' } : { order: '1' }]"
+                :style="[i % 2 === 0 ? { order: '2' } : { order: '1' }]"
               >
                 <p>{{ c.text }}</p>
               </div>
@@ -246,9 +104,11 @@
 </template>
 
 <script>
-// import Project from "@/components/Projects/project-components/ProjectComponent.vue";
-
 import { mapGetters, mapState } from "vuex";
+import Reload from "@/components/general/Reload.vue";
+import CrossIcon from "@/components/Icons/CrossIcon.vue";
+import DownArrowIcon from "@/components/Icons/DownArrowIcon.vue";
+import ShareBoxVue from "@/components/general/ShareBox.vue";
 
 export default {
   name: "Project",
@@ -261,12 +121,21 @@ export default {
     };
   },
   components: {
-    // Project: Project
+    Reload,
+    CrossIcon,
+    DownArrowIcon,
+    ShareBoxVue,
   },
   computed: {
     ...mapState(["url"]),
     ...mapState("studio", ["projects"]),
     ...mapGetters("studio", ["projectById"]),
+    createdDate: function() {
+      const date = new Date(this.project.createdAt);
+      const year = date.getFullYear();
+      console.log(year);
+      return year;
+    },
   },
   created() {
     return this.getProject(this.$route.params.id);
@@ -274,16 +143,20 @@ export default {
   methods: {
     async getProject(id) {
       this.reload = false;
+      this.loading = true;
       if (this.projects.length == 0) {
-        await this.$store.dispatch("studio/getAllProjects");
+        await this.$store.dispatch("studio/fetch_projects");
       }
-      this.project = await this.projectById(id);
+
+      this.project = this.projectById(id);
+      console.log(this.project);
+      this.loading = false;
+
       if (!this.project) return (this.reload = true);
-      this.project && (this.loading = false);
     },
   },
   watch: {
-    "$route.params.id": function (id) {
+    "$route.params.id": function(id) {
       if (id) this.getProject(id);
     },
   },
@@ -315,6 +188,7 @@ export default {
   background-repeat: no-repeat;
   will-change: opacity;
   z-index: 3;
+  background-color: #fff;
 }
 
 .hero__meta {
@@ -335,6 +209,7 @@ export default {
 
 .hero__meta .hero__title {
   padding: 14px 16px;
+  font-size: 2em;
 }
 .hero .hero__meta .hero__arrow {
   margin-left: auto;
@@ -376,9 +251,10 @@ export default {
   background-color: #fff;
   padding: 112px 100px 106px 16px;
   z-index: 1;
-
-  font-size: 80px;
-  line-height: 80px;
+  font-weight: 400;
+  font-size: 3.5vw;
+  line-height: 4.5vw;
+  color: #333;
 }
 
 .meta .meta__share {
@@ -435,10 +311,7 @@ export default {
   padding-bottom: 110px;
   z-index: 1;
 }
-.blocks .block.block-text {
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-}
+
 .blocks .block.block-image .block-image__image.width--two-thirds {
   width: 66.66%;
 }
@@ -447,9 +320,8 @@ export default {
   flex: 0 0 33.33%;
   padding: 0 16px;
   margin-left: auto;
-
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 3vmax;
+  line-height: 3.3vmax;
 }
 .blocks .block.block-text .block-text__image {
   position: relative;
@@ -498,14 +370,8 @@ export default {
 }
 
 #single-post {
-  /* position: absolute;
-  top: 0;
-  right: 33.33%;
-  bottom: 0;
-  left: 0; */
   opacity: 1;
-
-  min-width: 60%;
+  min-width: 70%;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -514,6 +380,7 @@ export default {
   -webkit-transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
   transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
 }
+
 @media (max-width: 900px) {
   #profile {
     grid-template-columns: 1fr;
@@ -535,7 +402,7 @@ export default {
     padding-right: 16px;
     padding-bottom: 28px;
   }
-  .blocks .block.block-text .block-text__image img{
+  .blocks .block.block-text .block-text__image img {
     width: 70%;
     margin: auto;
   }
@@ -579,6 +446,13 @@ export default {
 
   .blocks .block.block-text .block-text__image {
     order: 1 !important;
+  }
+  @media screen and (max-width: 900px) {
+    #single-post {
+      width: 100% !important;
+      background-color: #fff;
+      z-index: 9999;
+    }
   }
 }
 </style>

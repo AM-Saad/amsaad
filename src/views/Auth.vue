@@ -29,8 +29,6 @@
 <script>
 import SignUpCompnent from "@/components/auth-components/SignUpCompnent.vue";
 import LoginComponent from "@/components/auth-components/LoginComponent.vue";
-import { bus } from "../main.js";
-import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "Auth",
@@ -44,7 +42,6 @@ export default {
     SignUpCompnent: SignUpCompnent,
     LoginComponent: LoginComponent
   },
-  // computed: { ...mapState(["url", "isAuth"]) },
   methods: {
     switchComponent(comp) {
       this.currentComp = comp;

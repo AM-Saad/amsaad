@@ -3,36 +3,19 @@
     <div class="auth-forms">
       <div class="auth-forms_box">
         <a class="button-pill button-pill--icon m-medium" @click="close()">
-          <svg
-            data-v-82768ea8
-            data-v-4fdd230d
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon-cross"
-          >
-            <path
-              data-v-82768ea8
-              data-v-4fdd230d
-              d="M0.146484 9.14722L9.14722 0.146484L9.85433 0.853591L0.853591 9.85433L0.146484 9.14722Z"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              fill="black"
-            />
-            <path
-              data-v-82768ea8
-              data-v-4fdd230d
-              d="M0.853637 0.14712L9.85361 9.14706L9.1465 9.85417L0.146531 0.854228L0.853637 0.14712Z"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              fill="black"
-            />
-          </svg>
+          <cross-icon />
         </a>
-        <div class="auth-forms_box_header p-medium grid f-space-between">
-          <img src="@/assets/images/Mix.png" class alt="logo" />
+        <div class="">
+          <img
+            src="@/assets/images/full-vertical.png"
+            class="auth-forms_box_header_img-vertical"
+            alt="logo"
+          />
+          <img
+            src="@/assets/images/horizontal.png"
+            class="auth-forms_box_header_img-horizontal"
+            alt="logo"
+          />
           <h3 class="c-b p-l-3 font-xl">Access your account to continue</h3>
         </div>
         <AuthForms v-on:close="close"></AuthForms>
@@ -43,6 +26,7 @@
 
 <script>
 import AuthForms from "@/components/general/AuthForms.vue";
+import CrossIcon from "@/components/Icons/CrossIcon.vue";
 
 export default {
   name: "FormPopup",
@@ -52,19 +36,20 @@ export default {
   props: ["startAuth"],
 
   components: {
-    AuthForms: AuthForms
+    AuthForms,
+    CrossIcon,
   },
   methods: {
     close() {
       this.$emit("close");
-    }
+    },
   },
   watch: {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style >
+<style>
 .auth-forms {
   position: fixed;
   left: 0;
@@ -95,12 +80,26 @@ export default {
   border-right: 5px solid var(--main-color);
   border-bottom: 3px solid var(--main-color);
   color: #333 !important;
+  position: relative;
 }
 .auth-forms_box_header {
   align-items: center;
 }
-.auth-forms_box_header img {
-  height: 120px;
+.auth-forms_box_header_img-vertical,
+.auth-forms_box_header_img-horizontal
+{
+  width: 2rem;
+  display: block;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.auth-forms_box_header_img-vertical
+{
+  display: none;
+  width: 14rem;
+
 }
 
 .auth-forms_box
@@ -119,6 +118,13 @@ export default {
 @media (max-width: 900px) {
   .auth-forms_box {
     min-width: 100%;
+  }
+  .auth-forms_box_header_img-vertical
+{
+  display: block;
+}
+  .auth-forms_box_header_img-horizontal {
+    display: none;
   }
 }
 </style>
