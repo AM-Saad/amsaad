@@ -1,13 +1,7 @@
 <template>
   <figure v-lazyload class="image__wrapper">
-    <ImageSpinner
-      class="image__spinner"
-    />
-    <img
-      class="image__item"
-      :data-url="source"
-      alt="random image"
-    >
+    <ImageSpinner class="image__spinner" />
+    <img class="image__item" :data-url="source" alt="random image" />
   </figure>
 </template>
 
@@ -17,43 +11,41 @@ import ImageSpinner from "./ImageSpinner";
 export default {
   name: "ImageItem",
   components: {
-    ImageSpinner
+    ImageSpinner,
   },
   props: {
     source: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
-<style scoped >
+<style scoped>
 .image__wrapper {
-	 display: flex;
-	 justify-content: center;
-	 align-items: center;
-	 border-radius: 4px;
-   
-       max-height: 299px;
-    overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  max-height: 299px;
+  overflow: hidden;
 }
- .image__wrapper.loaded .image__item {
-	 visibility: visible;
-	 opacity: 1;
-	 border: 0;
+.image__wrapper.loaded .image__item {
+  visibility: visible;
+  opacity: 1;
+  border: 0;
 }
- .image__wrapper.loaded .image__spinner {
-	 display: none;
-	 width: 100%;
+.image__wrapper.loaded .image__spinner {
+  display: none;
+  width: 100%;
 }
- .image__item {
-	 width: 100%;
-       min-height: 160px; 
-	 border-radius: 4px;
-	 transition: all 0.4s ease-in-out;
-	 opacity: 0;
-	 visibility: hidden;
+.image__item {
+  width: 100%;
+  min-height: 160px;
+  border-radius: 4px;
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
 }
- 
 </style>

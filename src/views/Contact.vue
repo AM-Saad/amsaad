@@ -29,8 +29,6 @@
     <div v-if="!enter" class="columns opacity-1">
       <Contacts ref="contacts"></Contacts>
       <About ref="about"></About>
-      <!-- <People ref="people"></People> -->
-      <!-- <Rails :loading="loading" ref="rails" :refs="this.$refs"></Rails> -->
     </div>
     <div class="columns-footer" v-if="!enter">
       <div class="columns-footer__menu">
@@ -40,9 +38,6 @@
         <div class="columns-footer__menu-item" @click="activeColumn('two', $event)">
           <div class="button-pill" data-column="two">Contacts</div>
         </div>
-        <!-- <div class="columns-footer__menu-item" @click="activeColumn('three', $event)">
-          <div class="button-pill" data-column="three">Studio</div>
-        </div>-->
       </div>
     </div>
   </div>
@@ -52,8 +47,6 @@
 import loadingCom from "@/components/general/homeloading.vue";
 import Contacts from "@/components/Contact/Contacts.vue";
 import About from "@/components/Contact/About.vue";
-import People from "@/components/Contact/People.vue";
-import Rails from "@/components/Contact/Rails.vue";
 import * as helpers from "@/helpers/home";
 let $ = require("jquery");
 
@@ -72,8 +65,6 @@ export default {
   components: {
     Contacts: Contacts,
     About: About,
-    People: People,
-    Rails: Rails,
     loadingCom: loadingCom
   },
   computed: {
@@ -81,9 +72,7 @@ export default {
     ...mapState("studio", ["articles", "projects", "ready"])
   },
   mounted() {
-    // if (this.ready == 2) {
     this.start();
-    // }
     this.loading = false;
 
     window.addEventListener("resize", () => {
@@ -120,9 +109,7 @@ export default {
     }
   },
   watch: {
-    // "$route.params.type": function(id) {
-    //   console.log(v);
-    // },
+  
     windowWidth() {
       helpers.calcColumn();
     },
@@ -134,14 +121,7 @@ export default {
       }
     }
   }
-  // beforeRouteLeave(to, from, next) {
-  //   this.$store.dispatch({ type: "calcColumns" });
 
-  //   this.$store.dispatch("shrink");
-
-  //   console.log("beforeRouteLeave: HOME");
-  //   setTimeout(() => next(), 1000);
-  // }
 };
 </script>
 
@@ -149,57 +129,5 @@ export default {
 .vdr.active:before {
   outline: 0;
 }
-.columns-footer .columns-footer__menu {
-  display: -webkit-box;
-  display: flex;
-  padding: 16px;
-  border-bottom: 1px solid #000;
-}
 
-.columns-footer {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 2px 4px 8px 0px rgb(161 161 161 / 37%),
-    -2px -4px 8px 0px rgb(193 193 193 / 37%);
-  z-index: 25;
-  -webkit-transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
-  transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
-}
-.columns-footer .columns-footer__menu .columns-footer__menu-item {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-flex: 0;
-  flex: 0 0 33.33%;
-}
-.columns-footer .columns-footer__menu .columns-footer__menu-item .button-pill {
-  border: 1px solid transparent;
-  -webkit-transition: border-color 0.6s cubic-bezier(0.55, 0, 0.1, 1);
-  transition: border-color 0.6s cubic-bezier(0.55, 0, 0.1, 1);
-}
-.columns-footer
-  .columns-footer__menu
-  .columns-footer__menu-item
-  .button-pill.active {
-  border: 1px solid #000;
-  background: var(--main-color);
-  color: #fff;
-}
-.columns-footer .columns-footer__buttons {
-  display: -webkit-box;
-  display: flex;
-  padding: 16px;
-}
-@media (max-width: 900px) {
-  .columns-footer {
-    display: block;
-  }
-}
 </style>

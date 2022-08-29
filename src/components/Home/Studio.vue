@@ -9,10 +9,10 @@
     <a class="enlarge button-pill" ref="button" @click="expand()">Studio</a>
     <div class="flex f-space-between column-head">
       <button
-        :disabled="ready !== 2"
+        :disabled="ready % 2 !== 0"
         @click="expanded ? shrink() : expand()"
         class="items__title"
-        :class="[{ disabled: ready !== 2 }]"
+        :class="[{ disabled: ready % 2 !== 0 }]"
       >
         <span>Studio</span>
         <span>
@@ -134,9 +134,11 @@ export default {
 <style>
 .information__text {
   padding: 0 3rem 16px 16px;
+  min-height: 59vh;
+
 }
 .information__text p {
-  font-size: 20px;
+  font-size: 2vh;
   margin-bottom: 24px;
 }
 .disabled {

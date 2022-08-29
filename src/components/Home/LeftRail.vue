@@ -4,7 +4,9 @@
     data-rail="one"
     ref="one"
     @mousedown="getDragPointer($event)"
-    :style=" {'left':`${one.left}%`}"
+    v-touch:tap="touchTab"
+    v-touch:moving="touchMove"
+    :style="{ left: `${one.left}%` }"
   ></div>
 </template>
 
@@ -17,16 +19,33 @@ export default {
   data() {
     return {
       rail: null,
-      shiftX: null
+      shiftX: null,
     };
   },
   computed: {
-    ...mapState(["one", "two"])
+    ...mapState(["one"]),
   },
   mounted() {
     this.rail = this.$refs.one;
   },
   methods: {
+    touchTab(e) {
+      if (e.changedTouches) {
+        const x = e.changedTouches[0].clientX;
+        const elRect = e.target.getBoundingClientRect();
+        this.shiftX = x - elRect.left;
+      }
+    },
+    touchMove(e) {
+      if (e.changedTouches) {
+        helpers.moveRail(
+          this.shiftX,
+          this.rail,
+          e.changedTouches[0].pageX,
+          "one"
+        );
+      }
+    },
     getDragPointer(e) {
       const x = e.clientX;
       const elRect = e.target.getBoundingClientRect();
@@ -41,12 +60,7 @@ export default {
     onMouseUp() {
       document.getElementsByTagName("body")[0].style.cursor = "";
       document.removeEventListener("mousemove", this.onMouseMove);
-    }
+    },
   },
-  watch: {
- 
-  }
 };
 </script>
-<style>
-</style>
