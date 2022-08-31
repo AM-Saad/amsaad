@@ -23,8 +23,8 @@
     <div class="information__text">
       <p>What does it mean to elevate the human experience?</p>
       <p>
-        AMSaad is a software and digital resources studio based in Egypt with a
-        timeless approach that fosters connection.
+        Hi,this is Abdelrahman Saad  software developer
+        based in Egypt with a timeless approach that fosters connection.
       </p>
       <p>
         Every detail is thoughtfully considered, coalescing in work that forges
@@ -135,10 +135,9 @@ export default {
 .information__text {
   padding: 0 3rem 16px 16px;
   min-height: 59vh;
-
 }
 .information__text p {
-  font-size: 2vh;
+  font-size: 2.5vh;
   margin-bottom: 24px;
 }
 .disabled {
@@ -146,7 +145,7 @@ export default {
 }
 @media (max-width: 900px) {
   .information__text p {
-    line-height: 24px;
+    line-height: 1.6;
   }
 }
 </style>

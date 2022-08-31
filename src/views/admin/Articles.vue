@@ -1,37 +1,54 @@
 <template>
   <div>
-    <div class="content" :class="{'loader-effect':loading}">
-      <h1>All Articles</h1>
-      <div v-if="!loading" class="grid g-four">
-        <div v-for="a of allarticles" :key="a._id" class="content-item p-relative">
-          <div class="content-item_bar">
-            <span>{{a.date}}</span>
-            <div class="flex">
-              <router-link :to="{name:'newarticle',params: { id: a._id }}">
-                <i class="fas fa-edit c-b m-r-3"></i>
-              </router-link>
-              <i class="fas fa-trash c-r m-l-3" @click="deleteArticle(a._id)"></i>
-            </div>
-          </div>
-          <h4>{{a.title}}</h4>
-        </div>
+    <div class="content">
+      <router-link class="back_btn" to="/admin/dashboard">
+        <left-arrow-icon />
+
+        Dashboard</router-link
+      >
+      <div class="flex f-space-between">
+        <h1>All Articles</h1>
+        <router-link class="btn btn-success" :to="{ name: 'new_article' }"
+          >New Article</router-link
+        >
       </div>
+      <div v-if="!loading" class="grid g-four">
+        <list-item
+          v-for="a of allarticles"
+          :key="a._id"
+          :title="a.title"
+          :description="a.site_description"
+          :link="`/admin/articles/new/${a._id}`"
+          :id="a._id"
+          :image="url + '/' + a.image"
+          :date="a.date"
+          @delete="deleteArticle(a._id)"
+        />
+      </div>
+      <p v-if="loading">Loading...</p>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import ListItem from "@/components/Admin/ListItem";
+import LeftArrowIcon from "@/components/Icons/LeftArrowIcon.vue";
 
 export default {
   name: "List",
   data() {
     return {
-      loading: true
+      loading: true,
     };
   },
+  components: {
+    ListItem,
+    LeftArrowIcon,
+  },
   computed: {
-    ...mapState("admin", ["allarticles"])
+    ...mapState(["url"]),
+    ...mapState("admin", ["allarticles"]),
   },
   created() {
     if (this.allarticles.length == 0) {
@@ -43,15 +60,14 @@ export default {
   methods: {
     deleteArticle(id) {
       this.$store.dispatch({ type: "admin/deleteArticle", data: { id: id } });
-    }
+    },
   },
   watch: {
     allarticles(val) {
       if (val) this.loading = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -38,10 +38,10 @@
               <router-link
                 :to="{
                   name: 'home',
-                  params: { category: project.category, type: 'project' },
+                  params: { category: project.category.name, type: 'project' },
                 }"
                 class="button-pill"
-                >{{ project.category }}</router-link
+                >{{ project.category.name }}</router-link
               >
             </div>
             <div class="meta__attributes">
@@ -78,11 +78,12 @@
               <div
                 class="block-text__image"
                 :style="[i % 2 === 0 ? { order: '1' } : { order: '2' }]"
+                v-if="c.image"
               >
                 <img
                   class="blur show"
                   :src="url + c.image"
-                  alt
+                  :alt="project.title"
                   data-gallery-image="https://www.carr.net.au/wp-2020/wp-content/uploads/2020/09/carr_nortonroseVIC-248-LR.jpg"
                   data-gallery-caption
                 />
@@ -93,7 +94,7 @@
                 data-footnotes
                 :style="[i % 2 === 0 ? { order: '2' } : { order: '1' }]"
               >
-                <p>{{ c.text }}</p>
+                <p v-html="c.text"></p>
               </div>
             </div>
           </div>
@@ -133,7 +134,6 @@ export default {
     createdDate: function() {
       const date = new Date(this.project.createdAt);
       const year = date.getFullYear();
-      console.log(year);
       return year;
     },
   },
@@ -149,7 +149,6 @@ export default {
       }
 
       this.project = this.projectById(id);
-      console.log(this.project);
       this.loading = false;
 
       if (!this.project) return (this.reload = true);
@@ -242,7 +241,8 @@ export default {
   flex-wrap: wrap;
   position: relative;
   background-color: #fff;
-  padding-bottom: 225px;
+  padding-bottom: 8vmax;
+  margin-bottom: 4rem;
 }
 .meta .meta__subtitle {
   -webkit-box-flex: 0;
@@ -320,8 +320,9 @@ export default {
   flex: 0 0 33.33%;
   padding: 0 16px;
   margin-left: auto;
-  font-size: 3vmax;
-  line-height: 3.3vmax;
+  font-size: 3vh;
+  color: #333;
+  width: 100%;
 }
 .blocks .block.block-text .block-text__image {
   position: relative;
@@ -329,6 +330,7 @@ export default {
   flex: 0 0 50%;
   padding-top: 5px;
   padding-left: 16px;
+  border: 1.5px solid #f8f8f8;
 }
 
 .blocks .block.block-text .block-text__text p {
@@ -340,7 +342,7 @@ export default {
 }
 .blocks .block.block-text .block-text__image img {
   display: block;
-  width: 50%;
+  width: 70%;
   margin: auto;
 }
 
@@ -403,7 +405,7 @@ export default {
     padding-bottom: 28px;
   }
   .blocks .block.block-text .block-text__image img {
-    width: 70%;
+    width: 90%;
     margin: auto;
   }
   .meta .meta__share {

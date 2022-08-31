@@ -8,7 +8,7 @@
     </div>
     <div class="information__text">
       <div>
-           <p>
+        <p>
           <b>Contact Us</b>
         </p>
         <p>Mobile: 00201156565910</p>
@@ -21,23 +21,26 @@
           <b>Follow Us</b>
         </p>
         <p>
-          <a href="https://www.linkedin.com/in/aabdelrahman-mohamed/">LinkedIn</a>
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/aabdelrahman-mohamed/"
+            >LinkedIn</a
+          >
         </p>
         <p>
-          <a href="https://dev.to/abdelrahman">Dev</a>
+          <a target="_blank" href="https://dev.to/abdelrahman">Dev</a>
         </p>
         <p>
-          <a href="https://github.com/AM-Saad">Github</a>
+          <a target="_blank" href="https://github.com/AM-Saad">Github</a>
         </p>
       </div>
     </div>
 
     <div class="logo">
       <img src="@/assets/images/horizontal.png" alt="logo" />
-      
     </div>
-    <Footer></Footer>
-    <AuthPortal :visibilePortal="visibilePortal"></AuthPortal>
+    <Footer />
+    <auth-portal :visibilePortal="visibilePortal" />
   </div>
 </template>
 
@@ -51,17 +54,17 @@ export default {
   name: "Projetcs",
   data() {
     return {
-      visibilePortal: false
+      visibilePortal: false,
     };
   },
   // props: ["width", "height"],
 
   components: {
     Footer: Footer,
-    AuthPortal: AuthPortal
+    AuthPortal: AuthPortal,
   },
   computed: {
-    ...mapState(["two", "one"])
+    ...mapState(["two", "one"]),
   },
   mounted() {
     this.$emit("created", { col: "studio" });
@@ -78,33 +81,36 @@ export default {
     shrink() {
       helpers.changePositions({
         one: { right: 66.6, left: 33.3 },
-        two: { right: 33.3, left: 66.6 }
+        two: { right: 33.3, left: 66.6 },
       });
       helpers.shrink();
     },
     expand() {
       helpers.changePositions({
         one: { right: 95, left: 5 },
-        two: { right: 90, left: 10 }
+        two: { right: 90, left: 10 },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
+a,
+a:visited {
+  color: #333;
+}
 .information__text {
   padding: 0 3rem 16px 16px;
   min-height: 59vh;
 }
 .information__text p {
-  font-size: 2vh;
+  font-size: 2.5vh;
   margin-bottom: 20px;
 }
 @media (max-width: 900px) {
-
   .information__text p {
-    line-height: 24px;
+    line-height: 1.6;
   }
 }
 </style>

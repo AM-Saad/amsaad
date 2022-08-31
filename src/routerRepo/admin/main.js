@@ -20,7 +20,7 @@ export default [
     },
     {
         path: "/admin/articles",
-        name: "allarticles",
+        name: "admin_articles",
         component: () =>
             import(/* webpackChunkName: "Articles" */ "@/views/admin/Articles.vue"),
         meta: { requiredAuth: true },
@@ -28,7 +28,7 @@ export default [
     },
     {
         path: "/admin/articles/new/:id?",
-        name: "newarticle",
+        name: "new_article",
         component: () =>
             import(/* webpackChunkName: "CreateArticle" */ "@/views/admin/CreateArticle.vue"),
         meta: {
@@ -50,7 +50,7 @@ export default [
     },
     {
         path: "/admin/projects",
-        name: "allprojects",
+        name: "admin_projects",
         component: () =>
             import(/* webpackChunkName: "Projects" */ "@/views/admin/Projects.vue"),
         meta: { requiredAuth: true },
@@ -58,7 +58,7 @@ export default [
     },
     {
         path: "/admin/projects/new/:id?",
-        name: "newproject",
+        name: "new_project",
         component: () =>
             import(/* webpackChunkName: "CreateProject" */ "@/views/admin/CreateProject.vue"),
         meta: {

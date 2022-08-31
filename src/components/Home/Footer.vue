@@ -3,6 +3,14 @@
     <div class>
       <a
         class="button-pill button-pill--icon"
+        href="https://www.linkedin.com/in/aabdelrahman-mohamed/"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a
+        class="button-pill button-pill--icon"
         href="https://www.facebook.com/amsaad.eg"
         rel="noreferrer"
         target="_blank"

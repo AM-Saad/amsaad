@@ -35,7 +35,7 @@ const fetch_articles = async ({ commit, state, rootState }) => {
     }
 
 
-    let allarticles = [...articles, ...res.json];
+    let allarticles = [...articles.reverse(), ...res.json];
 
     state.ready += 1
     commit('setArticles', allarticles)

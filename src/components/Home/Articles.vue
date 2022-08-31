@@ -13,13 +13,13 @@
     <Reload :reload="reload" @reload="getArticles()" />
 
     <div v-if="!loading">
-      <a class="enlarge button-pill" ref="button" @click="expand()">Articles</a>
+      <a class="enlarge button-pill" ref="button" @click="expand()">Blog</a>
       <div class="flex f-space-between column-head">
         <button
           class="items__title"
           :disabled="ready % 2 !== 0"
           @click="expanded ? shrink() : expand()"
-          :class="[{ flex: !isFiltersActive }, { none: isFiltersActive }, {disabled:ready % 2 !== 0}]"
+          :class="[{ block: !isFiltersActive }, { none: isFiltersActive }, {disabled:ready % 2 !== 0}]"
         >
           <span >Blog</span>
           <span>

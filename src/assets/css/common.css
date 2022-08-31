@@ -431,6 +431,9 @@
   display: grid
 }
 
+.g-two{
+  grid-template-columns: 1fr 1fr;
+}
 .flex {
   display: flex
 }
@@ -496,4 +499,10 @@
 
 .close:hover {
   opacity: .8;
+}
+
+@media screen and (max-width: 900px){
+  .g-two{
+    grid-template-columns: 1fr !important;
+  }
 }
