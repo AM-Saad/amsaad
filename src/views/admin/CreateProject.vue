@@ -8,189 +8,207 @@
       method="POST"
       enctype="multipart/form-data"
     >
-      <div>
-        <div class="form_inputs">
-          <div class="flex f-space-between">
-            <h2 v-if="!edit">Create Project</h2>
-            <h2 v-if="edit">Edit Project</h2>
-            <router-link class="btn" :to="{ name: 'allprojects' }"
-              >All Project
-              <down-arrow-icon />
-            </router-link>
-          </div>
-          <div class="m-r-3">
-            <div>
-              <label for="title">Title</label>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                v-model="form.title"
-                :class="{ 'required-input': alert }"
-              />
-            </div>
-            <div>
-              <label for="subtitle">Sub Title</label>
-              <input
-                type="text"
-                name="subtitle"
-                id="subtitle"
-                v-model="form.subtitle"
-                :class="{ 'required-input': alert }"
-              />
-            </div>
-            <div>
-              <label for="client">Client</label>
-              <input type="text" name="client" id="client" v-model="form.client" />
-            </div>
-            <div>
-              <label for="country">Country</label>
-              <input
-                type="text"
-                name="country"
-                id="country"
-                v-model="form.country"
-              />
-            </div>
-            <div>
-              <label for="demo">Demo</label>
-              <input type="text" name="demo" id="demo" v-model="form.demo" />
-            </div>
-          </div>
-          <div class="m-l-3">
-            <div>
-              <label for="itemImg">image</label>
-              <input type="file" name="image" id="itemImg" @change="addFile" />
-            </div>
-            <div>
-              <label for="category">Category</label>
-              <select name="category" id="category" v-model="form.category">
-                <option
-                  v-for="t in categories"
-                  :key="t.name"
-                  :data-val="t.name"
-                  :value="t.name"
-                  class="options"
-                >
-                  {{ t.name }}
-                </option>
-              </select>
-            </div>
+      <div class="content">
+        <router-link class="back_btn" :to="{ name: 'admin_projects' }">
+          <left-arrow-icon />
 
-            <div>
-              <label for="tags">Project Tags:</label>
-              <input
-                class="currentInput input"
-                id="tags"
-                type="text"
-                placeholder="Type Tags Then Press Enter"
-                @keyup="getTag($event)"
-              />
-              <div class="tags flex">
-                <li
-                  v-for="t in form.tags"
-                  :key="t"
-                  :data-val="t"
-                  class="options btn btn-info tag-span"
-                >
-                  {{ t }}
-                  <i class="fas fa-times" @click="removetag(t)"></i>
-                </li>
-              </div>
-            </div>
-            <div>
-              <label for="site_description">Site Description</label>
-              <input
-                type="text"
-                name="site_description"
-                id="site_description"
-                v-model="form.site_description"
-              />
-            </div>
-          </div>
-          <div class="form-control">
-            <input type="checkbox" name="active" id="active" v-model="form.active" />
-            <label for="active">{{ form.active ? "Active" : "Not Active" }}</label>
+          Projects</router-link
+        >
+        <div class="flex f-space-between">
+          <h2 v-if="!edit">Create Project</h2>
+          <h2 v-if="edit">Edit Project</h2>
+        </div>
+        <div class="m-r-3">
+          <div>
+            <label for="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              v-model="form.title"
+              :class="{ 'required-input': alert }"
+            />
           </div>
           <div>
-            <label for="brief">Brief</label>
-            <textarea
-              style="min-height: 100px"
+            <label for="subtitle">Sub Title</label>
+            <input
               type="text"
-              name="brief"
-              id="brief"
-              v-model="form.brief"
-              rows="40"
-              cols="50"
+              name="subtitle"
+              id="subtitle"
+              v-model="form.subtitle"
               :class="{ 'required-input': alert }"
+            />
+          </div>
+          <div>
+            <label for="client">Client</label>
+            <input
+              type="text"
+              name="client"
+              id="client"
+              v-model="form.client"
+            />
+          </div>
+          <div>
+            <label for="country">Country</label>
+            <input
+              type="text"
+              name="country"
+              id="country"
+              v-model="form.country"
+            />
+          </div>
+          <div>
+            <label for="demo">Demo</label>
+            <input type="text" name="demo" id="demo" v-model="form.demo" />
+          </div>
+        </div>
+        <div class="m-l-3">
+          <div>
+            <label for="itemImg">image</label>
+            <input type="file" name="image" id="itemImg" @change="addFile" />
+          </div>
+          <div>
+            <label for="category">Category</label>
+            <select name="category" id="category" v-model="form.category">
+              <option
+                v-for="t in categories"
+                :key="t.name"
+                :data-val="t.name"
+                :value="t.name"
+                class="options"
+              >
+                {{ t.name }}
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label for="tags">Project Tags:</label>
+            <input
+              class="currentInput input"
+              id="tags"
+              type="text"
+              placeholder="Type Tags Then Press Enter"
+              @keyup="getTag($event)"
+            />
+            <div class="tags flex">
+              <li
+                v-for="t in form.tags"
+                :key="t"
+                :data-val="t"
+                class="options btn btn-info tag-span"
+              >
+                {{ t }}
+                <i class="fas fa-times" @click="removetag(t)"></i>
+              </li>
+            </div>
+          </div>
+          <div>
+            <label for="site_description">Site Description</label>
+            <input
+              type="text"
+              name="site_description"
+              id="site_description"
+              v-model="form.site_description"
+            />
+          </div>
+        </div>
+        <div class="form-control">
+          <input
+            type="checkbox"
+            name="active"
+            id="active"
+            v-model="form.active"
+          />
+          <label for="active">{{
+            form.active ? "Active" : "Not Active"
+          }}</label>
+        </div>
+        <div>
+          <label for="brief">Brief</label>
+          <textarea
+            style="min-height: 100px"
+            type="text"
+            name="brief"
+            id="brief"
+            v-model="form.brief"
+            rows="40"
+            cols="50"
+            :class="{ 'required-input': alert }"
+          ></textarea>
+        </div>
+        <div class="bg-w border-r-l p-xlarge  ">
+          <div>
+            <label for="contentText">Content</label>
+            <textarea
+              type="text"
+              name="contentText"
+              id="contentText"
+              v-model="form.contentText"
+              rows="20"
+              cols="50"
             ></textarea>
           </div>
-          <div class="bg-w border-r-l p-xlarge  ">
-            <div>
-              <label for="contentText">Content</label>
-              <textarea
-                type="text"
-                name="contentText"
-                id="contentText"
-                v-model="form.contentText"
-                rows="20"
-                cols="50"
-              ></textarea>
-            </div>
-            <div>
-              <label for="contentImg">image</label>
-              <input type="file" name="image" id="contentImg" />
-            </div>
-            <button @click.prevent="uploadImage()" class="btn btn-info">
-              Add
-            </button>
-            <div class="grid g-two">
+          <div>
+            <label for="contentImg">image</label>
+            <input type="file" name="image" id="contentImg" />
+          </div>
+          <button @click.prevent="uploadImage()" class="btn btn-info">
+            {{ loadingContents ? "Loading..." : "Uploading..." }}
+          </button>
+          <div class="grid ">
+            <draggable
+              v-model="form.content"
+              @change="changeContentOrder"
+              group="people"
+            >
               <div
-                class=" p-relative"
+                class="contents-item"
                 v-for="c in form.content"
                 :key="c.name"
               >
                 <i class="fas fa-times close" @click="removeContent(c.id)"></i>
-                <div v-if="c.image" class="p-relative w-50 block m-auto">
+                <div v-if="c.image" class="m-auto m-t-3 p-relative w-100">
                   <i
                     class="fas fa-times close font-s"
                     @click="deleteImage(c.image, c.id)"
                   ></i>
-                  <img :src="url + c.image" alt class="w-100" />
+                  <img :src="url + c.image" alt class="contents-item_img" />
                 </div>
                 <p class>{{ c.text }}</p>
               </div>
-            </div>
+            </draggable>
           </div>
-          <button
-            id="addNewitem"
-            @click.prevent="saveProject()"
-            class="btn btn-success"
-            type="button"
-            v-if="!edit && !loading"
-          >
-            Save
-          </button>
-          <button
-            id="addNewitem"
-            @click.prevent="saveProject()"
-            class="btn btn-success"
-            type="button"
-            v-if="edit && !loading"
-          >
-            Update
-          </button>
-          <button
-            id="addNewitem"
-            @click.prevent="saveProject()"
-            class="btn btn-success opacity-5"
-            type="button"
-            v-if="loading"
-          >
-            Loading...
-          </button>
         </div>
+        <button
+          id="addNewitem"
+          @click.prevent="saveProject()"
+          class="btn btn-success"
+          type="button"
+          v-if="!edit && !loading"
+        >
+          Save
+        </button>
+        <button
+          id="addNewitem"
+          @click.prevent="saveProject()"
+          class="btn btn-success"
+          type="button"
+          v-if="edit && !loading"
+        >
+          Update
+        </button>
+        <button
+          id="addNewitem"
+          @click.prevent="saveProject()"
+          class="btn btn-success opacity-5"
+          type="button"
+          v-if="loading"
+        >
+          Loading...
+        </button>
       </div>
+
       <!--Image Here-->
     </form>
   </div>
@@ -198,15 +216,22 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
-import Reload from "../../components/general/Reload.vue";
-import DownArrowIcon from "../../components/Icons/DownArrowIcon.vue";
+import Reload from "@/components/general/Reload.vue";
+import draggable from "vuedraggable";
+import LeftArrowIcon from "@/components/Icons/LeftArrowIcon.vue";
+
 export default {
-  components: { DownArrowIcon, Reload },
+  components: {
+    Reload,
+    draggable,
+    LeftArrowIcon,
+  },
   name: "CreateProject",
   data() {
     return {
       reload: false,
       loading: false,
+      loadingContents: false,
       alert: false,
       edit: false,
       form: {
@@ -255,12 +280,13 @@ export default {
         this.form.client = project.client;
         this.form.country = project.country || "";
         this.form.tags = project.tags;
-        this.form.content = project.content.map((c) => ({
+        this.form.content = project.content.map((c, i) => ({
           id: c.id,
           _id: c._id,
           name: c.name,
           text: c.text,
           image: c.image,
+          order: i,
         }));
         this.form.brief = project.brief;
         this.form.demo = project.demo;
@@ -272,13 +298,24 @@ export default {
       if (keyBoardKey === 13) {
         var thisValue = e.target.value.toLowerCase();
         if (thisValue != "") {
-          if (!this.form.tags.includes(thisValue)) this.form.tags.push(thisValue);
+          if (!this.form.tags.includes(thisValue))
+            this.form.tags.push(thisValue);
           e.target.value = "";
         }
       }
     },
     removetag(tag) {
       this.form.tags = this.form.tags.filter((t) => t != tag);
+    },
+    changeContentOrder(element) {
+      let content = this.form.content.findIndex(
+        (e) => e.id === element.moved.element.id
+      );
+      this.form.content[content].order = element.moved.newIndex;
+      const replaced = this.form.content.findIndex(
+        (e) => e.order === element.moved.newIndex
+      );
+      this.form.content[replaced].order = this.form.content[content].order;
     },
     async addContent(img) {
       if (this.form.contentText) {
@@ -292,7 +329,9 @@ export default {
       this.from.contentText = "";
     },
     async removeContent(id) {
-      const item = this.form.content.find((c) => c.id.toString() == id.toString());
+      const item = this.form.content.find(
+        (c) => c.id.toString() == id.toString()
+      );
 
       if (item.image) this.deleteImage(item.image, item.id);
       this.form.content = this.form.content.filter(
@@ -315,7 +354,7 @@ export default {
         if (validImageTypes.includes(fileType)) {
           var form = new FormData();
           form.append("image", file);
-
+          this.loadingContents = true;
           //upload image to server
           const res = await fetch(`${this.url}/admin/media`, {
             method: "Post",
@@ -323,12 +362,16 @@ export default {
           });
           const json = await res.json();
           this.addContent(json);
+          this.loadingContents = false;
         }
       }
     },
     async deleteImage(name, id) {
-      const item = this.form.content.find((c) => c.id.toString() == id.toString());
+      const item = this.form.content.find(
+        (c) => c.id.toString() == id.toString()
+      );
       item.image = null;
+      this.loadingContents = true;
 
       await this.$store.dispatch("admin/deleteImage", {
         name: name,
@@ -336,6 +379,7 @@ export default {
         content: id,
         id: this.$route.params.id,
       });
+      this.loadingContents = false;
     },
     async saveProject() {
       if (!this.form.title || !this.form.subtitle || !this.form.brief) {
@@ -372,7 +416,7 @@ export default {
     },
   },
   watch: {
-    "$route.params.id": function(id) {
+    "$route.params.id": function() {
       this.start();
     },
   },
@@ -382,5 +426,19 @@ export default {
 <style scoped>
 body {
   background-color: #f9f9f9 !important;
+}
+.contents-item {
+  position: relative;
+  background: #f9f9f9;
+  padding: 2rem;
+  box-shadow: var(--shadow2);
+  margin: 1rem;
+  border-radius: var(--m-radius);
+  display: grid;
+}
+.contents-item_img {
+  border: 1.2px solid;
+  width: 100%;
+  border-radius: var(--m-radius);
 }
 </style>

@@ -236,7 +236,7 @@ export default {
     color: #222;
 }
 .items__item-description {
-  font-size: 25px;
+  font-size: 24px;
   color:#666;
   margin-bottom: 1rem;
 }
@@ -271,7 +271,7 @@ export default {
 }
 #single-post .meta__share {
   position: absolute;
-  top: 172px;
+  top: 140px;
   right: 16px;
   text-align: right;
   margin: var(--m-margin) 0;

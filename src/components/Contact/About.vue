@@ -1,15 +1,30 @@
 <template>
-  <div class="column active" data-column="one" id="colOne" data-size="1" ref="about">
+  <div
+    class="column active"
+    data-column="one"
+    id="colOne"
+    data-size="1"
+    ref="about"
+  >
     <a class="enlarge button-pill" ref="button">About</a>
     <div class="flex f-space-between column-head">
-      <div class="items__title" :class="[{'flex': !activefilters}, { 'none': activefilters}]">
+      <div
+        class="items__title"
+        :class="[{ flex: !activefilters }, { none: activefilters }]"
+      >
         <span>About</span>
       </div>
     </div>
     <div class="information__text">
       <p>What does it mean to elevate the human experience?</p>
-      <p>AMSaad is a software and digital resources studio based in Egypt with a timeless approach that fosters connection.</p>
-      <p>Every detail is thoughtfully considered, coalescing in work that forges new ground while remaining true to our philosophy and vision.</p>
+      <p>
+        Hi,this is Abdelrahman Saad software developer based in Egypt with a
+        timeless approach that fosters connection.
+      </p>
+      <p>
+        Every detail is thoughtfully considered, coalescing in work that forges
+        new ground while remaining true to our philosophy and vision.
+      </p>
     </div>
   </div>
 </template>
@@ -24,13 +39,13 @@ export default {
   data() {
     return {
       activefilters: false,
-      allarticles: []
+      allarticles: [],
     };
   },
   computed: {
     ...mapState(["one", "two", "colWidth", "categories"]),
     ...mapState("studio", ["fetching", "filtredArticles"]),
-    ...mapGetters("studio", ["filterArticle"])
+    ...mapGetters("studio", ["filterArticle"]),
   },
   props: ["articles"],
   mounted() {
@@ -43,7 +58,7 @@ export default {
     shrink() {
       helpers.changePositions({
         one: { right: 66.6, left: 33.3 },
-        two: { right: 33.3, left: 66.6 }
+        two: { right: 33.3, left: 66.6 },
       });
       helpers.shrink();
     },
@@ -52,7 +67,7 @@ export default {
       $(".filters__filter-set .button-pill").removeClass("active");
       $(e.target).addClass("active");
       this.filterArticle(type);
-    }
+    },
   },
   watch: {
     filtredArticles(v) {
@@ -60,8 +75,8 @@ export default {
     },
     articles(v) {
       this.allarticles = v;
-    }
-  }
+    },
+  },
 };
 </script>
 

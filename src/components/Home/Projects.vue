@@ -21,7 +21,7 @@
           :disabled="ready % 2 !== 0"
           @click="expanded ? shrink() : expand()"
           :class="[
-            { flex: !isFiltersActive },
+            { block: !isFiltersActive },
             { none: isFiltersActive },
             { disabled: ready % 2 !== 0 },
           ]"

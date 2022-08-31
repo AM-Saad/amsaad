@@ -77,7 +77,6 @@ export default {
 }
 .form {
   margin: auto;
-  padding: 10px 0;
 }
 
 .form input {
@@ -92,6 +91,7 @@ export default {
   background: #fff;
   border: 1.2px solid #eee;
 }
+.form_inputs{background-color: #fff;}
 
 @media (max-width: 767.98px) {
   .form_inputs {

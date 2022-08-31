@@ -8,7 +8,12 @@
       method="POST"
       enctype="multipart/form-data"
     >
-      <div class=" form_inputs">
+      <div class="content">
+        <router-link class="back_btn" :to="{ name: 'admin_articles' }">
+          <left-arrow-icon />
+
+          Articles</router-link
+        >
         <h2 v-if="!edit">Create Article</h2>
         <h2 v-if="edit">Edit Article</h2>
         <div class="p-medium">
@@ -135,6 +140,8 @@
 import { mapGetters, mapMutations, mapState } from "vuex";
 import hljs from "highlight.js";
 import { quillEditor } from "vue-quill-editor";
+import LeftArrowIcon from "@/components/Icons/LeftArrowIcon.vue";
+
 export default {
   name: "createarticle",
   data() {
@@ -191,10 +198,11 @@ export default {
     };
   },
   components: {
+    LeftArrowIcon,
     quillEditor,
   },
   computed: {
-    ...mapState(["categories"]),
+    ...mapState(["categories", "url"]),
     ...mapState("admin", ["allarticles"]),
     ...mapGetters("admin", ["articleById"]),
     ...mapMutations(["msg"]),
@@ -243,7 +251,7 @@ export default {
       form.append("image", this.selectedFile);
       form.append("name", this.selectedFile.name);
       //upload image to server
-      const res = await fetch(`${url}/admin/media`, {
+      const res = await fetch(`${this.url}/admin/media`, {
         method: "Post",
         body: form,
       });
@@ -255,7 +263,7 @@ export default {
         this.$refs.myQuillEditor.quill.insertEmbed(
           range.index,
           "image",
-          `${url}${json}`
+          `${this.url}${json}`
         );
       }
     },
@@ -311,7 +319,7 @@ export default {
     },
   },
   watch: {
-    "$route.params.id": function(id) {
+    "$route.params.id": function() {
       this.startEditing();
     },
   },

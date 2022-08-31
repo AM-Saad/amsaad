@@ -9,8 +9,33 @@
 <script>
 export default {
   name: "Reload",
-  props:['reload']
+  props: ["reload"],
 };
 </script>
 
-<style></style>
+<style scoped>
+.reload {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #151d30c2;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  padding: var(--scnd-padding);
+  align-items: flex-start;
+  align-content: center;
+  z-index: 999999;
+}
+
+.reload h1 {
+  color: #fff;
+}
+
+.reload p {
+  color: var(--main-color);
+}
+</style>
