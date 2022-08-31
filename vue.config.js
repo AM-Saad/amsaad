@@ -7,7 +7,7 @@ module.exports = {
     sitemap: {
       // baseURL:'http://localhost:8080',
       hashMode: false,
-      baseURL: 'https://amsstudio.me',
+      baseURL: 'https://amsaad.co',
       routes,
     }
   },

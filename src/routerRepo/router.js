@@ -4,7 +4,7 @@ import Router from "vue-router";
 import adminRoutes from './admin/main.js'
 import studioRoutes from './studio/main.js'
 
-import NotFound from '../views/404.vue';
+// import NotFound from '@/views/404.vue';
 Vue.use(Router);
 
 
@@ -44,11 +44,11 @@ let router = new Router({
         import(/* webpackChunkName: "Contact" */ "../views/Contact.vue"),
     },
   
-    {
-      path: '*',
-      name: 'Not Found',
-      component: NotFound
-    },
+    // {
+    //   path: '*',
+    //   name: 'Not Found',
+    //   component: NotFound
+    // },
     ...studioRoutes,
     ...adminRoutes,
   ]
