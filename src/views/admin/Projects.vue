@@ -20,6 +20,7 @@
           :link="`/admin/projects/new/${a._id}`"
           :id="a._id"
           :image="url + '/' + a.image"
+          :active="a.active"
           :date="a.createdAt.slice(0,10)"
           :description="a.brief"
           @delete="deleteProject(a._id)"

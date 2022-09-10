@@ -235,7 +235,7 @@ export default {
       alert: false,
       edit: false,
       form: {
-        active: false,
+        active: true,
         site_description: "",
         loaded: false,
         title: null,
@@ -342,7 +342,7 @@ export default {
       var file = e.target.files[0];
       var validImageTypes = ["image/jpg", "image/jpeg", "image/png"];
       var fileType = file["type"];
-      if (validImageTypes.includes(fileType)) this.image = file;
+      if (validImageTypes.includes(fileType)) this.form.image = file;
     },
     async uploadImage() {
       const elm = document.getElementById("contentImg");

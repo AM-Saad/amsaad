@@ -10,7 +10,11 @@
     <div class="content-item_body ">
       <img class="content-item_body_img" :src="image" alt />
       <div>
-        <h3>{{ title }}</h3>
+        <div class="flex" style="align-items:center">
+          <h3 class="m-r-3">{{ title }}</h3>
+          <i class="fas fa-circle m-l-3 c-r" :class="{' c-g': active}"></i>
+        </div>
+
         <p>{{ description ? description : ".n.c" }}</p>
       </div>
     </div>
@@ -38,24 +42,29 @@ export default {
     description: {
       type: String,
     },
+    active:{
+      type: Boolean,
+    }
   },
 };
 </script>
 
 <style scoped>
-
 .content-item {
-    background-color: #fff;
-    font-size: 16px;
-    padding: 1em;
-    position: relative;
-    cursor: pointer;
-    margin-bottom: var(--m-margin);
-    border-radius: var(--s-radius);
-    grid-auto-rows: 35px auto;
-    border: 1.3px solid #000;
-    min-height: 125px;
-    color: #333;
+  background-color: #fff;
+  font-size: 16px;
+  padding: 1em;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: var(--m-margin);
+  border-radius: var(--s-radius);
+  grid-auto-rows: 35px auto;
+  border: 1px solid #000;
+  min-height: 125px;
+  color: #333;
+}
+.content-item:hover{
+  background: #f9f9f9;
 }
 .content-item_bar {
   border-bottom: 1px solid #ccc;
