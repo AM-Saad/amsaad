@@ -73,7 +73,6 @@ export default {
         await this.$store.dispatch("admin/getCategories");
       }
       const category = this.categoryById(id);
-      console.log(category.subCategory);
       this.name = category.name;
       this.subcategories = category.subCategory || [];
       return category && (this.loading = false);

@@ -48,7 +48,7 @@ export default new Vuex.Store({
   actions: {
     async checkConnection({ state }) {
 
-      const res = await fetch("http://info.cern.ch/")
+     await fetch("http://info.cern.ch/")
       state.networkconnections = !state.networkconnections
     },
     async fetch_categories({ commit, rootState }) {

@@ -56,12 +56,7 @@
 }
 
 .content {
-  background: #f9f9f9;
-  background: #f9f9f9;
-  -webkit-box-shadow: var(--shadow);
-  box-shadow: var(--shadow2);
   padding: var(--l-padding);
-  border-radius: var(--m-radius);
   width: 80vw;
   margin: var(--m-margin) auto;
 }
