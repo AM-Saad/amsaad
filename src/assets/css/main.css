@@ -289,6 +289,7 @@ body.search-pane--show .search-pane {
   transition: opacity 0.6s cubic-bezier(0.55, 0, 0.1, 1);
   will-change: opacity;
   max-width: 100%;
+  object-fit: contain;
 }
 
 
