@@ -1,12 +1,6 @@
 <template>
-  <div
-    class="column"
-    data-column="one"
-    id="colOne"
-    data-size="1"
-    ref="articles"
-    :class="[{ loading: loading }, { active: isActiveColumn }]"
-  >
+  <div class="column" data-column="one" id="colOne" data-size="1" ref="articles"
+    :class="[{ loading: loading }, { active: isActiveColumn }]">
     <ItemLoading v-if="loading"></ItemLoading>
 
     <!-- Reload if request failed -->
@@ -15,43 +9,22 @@
     <div v-if="!loading">
       <a class="enlarge button-pill" ref="button" @click="expand()">Blog</a>
       <div class="flex f-space-between column-head">
-        <button
-          class="items__title"
-          :disabled="ready % 2 !== 0"
-          @click="expanded ? shrink() : expand()"
-          :class="[{ block: !isFiltersActive }, { none: isFiltersActive }, {disabled:ready % 2 !== 0}]"
-        >
-          <span >Blog</span>
+        <button class="items__title" :disabled="ready % 2 !== 0" @click="expanded ? shrink() : expand()"
+          :class="[{ block: !isFiltersActive }, { none: isFiltersActive }, { disabled: ready % 2 !== 0 }]">
+          <span>Blog</span>
           <span>
-            <i
-              class="fas"
-              :class="expanded ? 'fa-times' : 'fa-arrows-alt-h'"
-            ></i>
+            <i class="fas" :class="expanded ? 'fa-times' : 'fa-arrows-alt-h'"></i>
           </span>
         </button>
 
-        <Filters
-          :isActive="isFiltersActive"
-          :val="filterVal"
-          @filter="filter"
-          @toggleFilter="isFiltersActive = !isFiltersActive"
-        />
+        <Filters :isActive="isFiltersActive" :val="filterVal" @filter="filter"
+          @toggleFilter="isFiltersActive = !isFiltersActive" />
       </div>
       <div class="items" v-if="items.length > 0">
-        <Article
-          v-for="article in items"
-          :key="article._id"
-          :article="article"
-        ></Article>
+        <Article v-for="article in items" :key="article._id" :article="article"></Article>
       </div>
       <div v-if="items.length == 0">
-        <img
-          class="w-75 m-auto block"
-          src="../../assets/images/noresult.svg"
-          style="margin-top:15px"
-          alt
-          srcset
-        />
+        <img class="w-75 m-auto block" src="../../assets/images/noresult.svg" style="margin-top:15px" alt srcset />
       </div>
     </div>
   </div>
@@ -88,7 +61,7 @@ export default {
     ...mapState(["two"]),
     ...mapState("studio", ["articles", "ready"]),
     ...mapGetters("studio", ["filterArticle"]),
-    isActiveColumn: function() {
+    isActiveColumn: function () {
       return this.activeColumn === "one" ? true : false;
     },
   },
@@ -146,16 +119,20 @@ export default {
   left: 0;
   z-index: 999999;
 }
+
 .post .create-post_pop-up.Unactive {
   display: none;
 }
+
 .allarticles #loading {
   height: 35px;
   width: 100px;
 }
-.disabled{
+
+.disabled {
   cursor: progress;
 }
+
 #imgPrv {
   display: none;
   position: fixed;
@@ -170,6 +147,7 @@ export default {
   box-shadow: var(--shadow);
   transition: 0.5s all ease-in-out;
 }
+
 #imgPrv img {
   height: auto;
   position: relative;
@@ -178,6 +156,6 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-@media (min-width: 320px) and (max-width: 557px) {
-}
+
+@media (min-width: 320px) and (max-width: 557px) {}
 </style>

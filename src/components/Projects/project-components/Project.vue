@@ -1,16 +1,12 @@
 <template>
   <div>
-    <router-link :to="{name:'projects', params:{ id:project._id }}">
+    <router-link :to="{ name: 'projects', params: { id: project._id } }">
       <div class="items__item">
-           <ImageItem
-          class="items__item-image"
-          v-if="project.image"
-          :source="this.url +'/'+ project.image"
-        ></ImageItem>
+        <ImageItem class="items__item-image" v-if="project.image" :source="this.url + '/' + project.image"></ImageItem>
         <div class="items__item-title">
-          <span class>{{project.title}}</span>
+          <span class>{{ project.title }}</span>
         </div>
-        <div class="items__item-date">{{project.subtitle}}</div>
+        <div class="items__item-date">{{ project.subtitle }}</div>
       </div>
     </router-link>
     <transition name="silde" mode="out-in">
@@ -42,9 +38,9 @@ export default {
     ...mapState(["url"])
   },
   props: ["project"],
-  created() {},
+  created() { },
   components: {
-    ImageItem:ImageItem
+    ImageItem
   },
   methods: {}
 };
@@ -64,6 +60,7 @@ export default {
   width: 88%;
   border-radius: var(--radius);
 }
+
 .post {
   width: 96%;
   display: grid;
@@ -83,6 +80,7 @@ export default {
   text-align: left;
   font-weight: 100;
 }
+
 .post_title img {
   height: 30px;
   width: 30px;
@@ -90,11 +88,13 @@ export default {
   border-radius: var(--radius);
   margin-right: var(--scnd-margin);
 }
+
 .post_date {
   font-size: 0.7em;
   text-align: right;
   padding-top: 10px;
 }
+
 .post_content p {
   color: #000000;
   font-size: 20px;
@@ -108,40 +108,50 @@ export default {
   overflow: scroll;
   transition: 0.4s ease-in-out all;
 }
+
 .post_image img {
   width: 100%;
   border-radius: var(--radius);
 }
+
 .post_likeComments {
   position: relative;
 }
+
 .post_likes {
   display: flex;
   position: absolute;
   left: 0;
 }
+
 .post_likes-icon {
   margin-left: var(--scnd-margin);
 }
+
 .post_likes a {
   margin-right: var(--scnd-margin);
   border-radius: var(--radius);
   cursor: pointer;
   transition: 0.2s all ease-in-out;
 }
+
 .post_likes a:hover {
   color: rgba(255, 0, 0, 0.762);
 }
+
 .post_likes a.active {
   color: rgba(255, 0, 0, 0.762);
 }
+
 .post_comment h6 {
   text-align: left;
   color: #888;
 }
+
 .post_comment p {
   color: #ccc;
 }
+
 .post_addComment {
   display: flex;
   background-color: #f5f5f5;
@@ -156,6 +166,7 @@ export default {
   transition: 0.25s all ease-in-out;
   font-size: 12px;
 }
+
 .post_addComment input:focus {
   padding: 0 10px;
   font-size: 14px;
@@ -166,10 +177,12 @@ export default {
   font-size: 15px;
   color: #888;
 }
+
 .post_actions {
   display: flex;
   justify-content: flex-end;
 }
+
 #editBox {
   position: absolute;
   background: #ffffffeb;
@@ -178,13 +191,16 @@ export default {
   left: 0;
   z-index: 999999;
 }
+
 .post .create-post_pop-up.Unactive {
   display: none;
 }
+
 .allposts #loading {
   height: 35px;
   width: 100px;
 }
+
 #imgPrv {
   display: none;
   position: fixed;
@@ -199,6 +215,7 @@ export default {
   box-shadow: var(--shadow);
   transition: 0.5s all ease-in-out;
 }
+
 #imgPrv img {
   height: auto;
   position: relative;
@@ -207,14 +224,15 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 @media (min-width: 320px) and (max-width: 557px) {
   .allposts {
     width: 100%;
     box-shadow: none;
     height: 79vh;
   }
+
   .post {
     width: 100%;
   }
-}
-</style>
+}</style>

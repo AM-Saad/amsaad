@@ -41,11 +41,12 @@ export default {
   width: 100%;
 }
 .image__item {
-  width: 100%;
+  width: 300px;
   min-height: 160px;
   border-radius: 4px;
   transition: all 0.4s ease-in-out;
   opacity: 0;
   visibility: hidden;
+  object-fit: contain;
 }
 </style>
